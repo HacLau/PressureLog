@@ -248,6 +248,7 @@ class MainActivity : BaseActivity() {
                             RecordType.LASTMONTH -> {
                                 it.queryLastMonth()
                             }
+
                             RecordType.ALL -> {
                                 it.queryAll()
                             }
@@ -263,15 +264,15 @@ class MainActivity : BaseActivity() {
                             } else {
                                 it.size
                             }
-                        ).forEach {record->
+                        ).forEach { record ->
                             sys += record.systolic
                             dia += record.diastolic
                             add(BloodEntity(type = ItemType.RECORD, record = record))
                         }
                     }
                     get(0).recordTop.apply {
-                        this?.systolic = if(isEmpty()) 0 else sys.div(size)
-                        this?.diastolic = if(isEmpty()) 0 else dia.div(size)
+                        this?.systolic = if (isEmpty()) 0 else sys.div(size)
+                        this?.diastolic = if (isEmpty()) 0 else dia.div(size)
                     }
 
                 }
@@ -374,13 +375,17 @@ class MainActivity : BaseActivity() {
     }
 
     private fun settingPrivacy(title: String?) {
-        startWebContentActivity(PageType.web, url = "https://blog.csdn.net/lyglostangel/article/details/120860852", title = title)
+        startWebContentActivity(
+            PageType.web,
+            url = "https://sites.google.com/view/pressurelog-privacy-policy/home",
+            title = title
+        )
     }
 
     private fun settingPolicy(title: String?) {
         startWebContentActivity(
             PageType.web,
-            url = "https://www.jianshu.com/p/282c7c4537b3?utm_campaign=maleskine&utm_content=note&utm_medium=seo_notes&utm_source=recommendation",
+            url = "https://sites.google.com/view/pressurelog-terms/home",
             title = title
         )
     }
