@@ -4,6 +4,9 @@ import android.view.View
 import android.widget.ProgressBar
 import com.liu.bloodpressure.R
 import com.liu.bloodpressure.base.BaseActivity
+import com.liu.bloodpressure.util.SPHelper
+import com.liu.bloodpressure.util.other
+import com.liu.bloodpressure.util.yes
 import java.util.Timer
 import java.util.TimerTask
 
@@ -38,7 +41,11 @@ class SplashActivity : BaseActivity() {
     }
 
     override fun next(v: View) {
-        startStepActivity()
+        SPHelper.isLaunchedStep.yes {
+            startMainActivity()
+        }.other {
+            startStepActivity()
+        }
     }
 
 

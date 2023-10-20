@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/menu_scale"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:src="@drawable/bg_triangle_degree"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:tint="@color/main_color" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/menu_scale"
+        android:background="@drawable/bg_btn_next">
+
+        <TextView
+            android:id="@+id/menu_recent"
+            android:layout_width="160dp"
+            android:layout_height="48dp"
+            android:gravity="center"
+            android:lineHeight="@dimen/sp_24"
+            android:text="@string/record_recent"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:layout_width="150dp"
+            android:layout_height="1dp"
+            android:background="@drawable/bg_record_item_12"
+            app:layout_constraintBottom_toTopOf="@id/menu_week"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/menu_recent" />
+
+        <TextView
+            android:id="@+id/menu_week"
+            android:layout_width="160dp"
+            android:layout_height="48dp"
+            android:gravity="center"
+            android:lineHeight="@dimen/sp_24"
+            android:text="@string/record_week"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/menu_recent" />
+
+        <View
+            android:layout_width="150dp"
+            android:layout_height="1dp"
+            android:background="@drawable/bg_record_item_12"
+            app:layout_constraintBottom_toTopOf="@id/menu_month"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/menu_week" />
+
+        <TextView
+            android:id="@+id/menu_month"
+            android:layout_width="160dp"
+            android:layout_height="48dp"
+            android:gravity="center"
+            android:lineHeight="@dimen/sp_24"
+            android:text="@string/record_month"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_16"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/menu_week" />
+
+        <View
+            android:layout_width="150dp"
+            android:layout_height="1dp"
+            android:visibility="gone"
+            android:background="@drawable/bg_record_item_12"
+            app:layout_constraintBottom_toTopOf="@id/menu_last_month"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/menu_month" />
+
+        <TextView
+            android:id="@+id/menu_last_month"
+            android:layout_width="160dp"
+            android:layout_height="48dp"
+            android:gravity="center"
+            android:lineHeight="@dimen/sp_24"
+            android:text="@string/record_last_month"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_16"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/menu_month" />
+        <View
+            android:layout_width="150dp"
+            android:layout_height="1dp"
+            android:background="@drawable/bg_record_item_12"
+            app:layout_constraintBottom_toTopOf="@id/menu_all"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/menu_last_month" />
+
+        <TextView
+            android:id="@+id/menu_all"
+            android:layout_width="160dp"
+            android:layout_height="48dp"
+            android:gravity="center"
+            android:lineHeight="@dimen/sp_24"
+            android:text="@string/record_all"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/menu_last_month" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

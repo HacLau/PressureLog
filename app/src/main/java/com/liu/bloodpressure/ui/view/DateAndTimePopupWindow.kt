@@ -7,12 +7,14 @@ import android.widget.Button
 import android.widget.PopupWindow
 import com.liu.bloodpressure.R
 import com.liu.bloodpressure.util.DateKt
+import com.liu.bloodpressure.util.toast
+import com.liu.bloodpressure.util.xx
 
 class DateAndTimePopupWindow(
     private val context: Context,
     private val currTime: String = "",
     private val clickCancel: () -> Unit = {},
-    private val clickSure: (String) -> Unit
+    private val clickSure: (Long) -> Unit
 ) : PopupWindow(context) {
     private var mCancel: Button
     private var mConfirm: Button
@@ -54,9 +56,17 @@ class DateAndTimePopupWindow(
             dismiss()
             clickCancel.invoke()
         }
+
         mConfirm.setOnClickListener {
-            dismiss()
-            clickSure.invoke("$mYearText-$mMonthText-$mDayText $mHourText:$mSecondText")
+            DateKt.getMills("$mYearText-$mMonthText-$mDayText $mHourText:$mSecondText").let {
+                if (it > System.currentTimeMillis()) {
+                    "The time is incorrect,it cannot exceed te current time".toast(context)
+                } else {
+                    dismiss()
+                    clickSure.invoke(it)
+                }
+            }
+
         }
         setDate()
         setData()
@@ -82,15 +92,15 @@ class DateAndTimePopupWindow(
     }
 
     private fun setData() {
-        mYearList = getMutList(1970, mYearText.toInt() + 10)
+        mYearList = getMutList(mYearText.toInt() - 1, mYearText.toInt() + 1)
         mMonthList = getMutList(1, 12)
         mHourList = getMutList(0, 23)
         mSecondList = getMutList(0, 59)
 
         mYear.setData(mYearList, mYearList.indexOf(mYearText))
-        mMonth.setData(mMonthList, mMonthList.indexOf(mMonthText))
-        mHour.setData(mHourList, mHourList.indexOf(mHourText))
-        mSecond.setData(mSecondList, mSecondList.indexOf(mSecondText))
+        mMonth.setData(mMonthList, mMonthList.indexOf((mMonthText.toInt()).xx()))
+        mHour.setData(mHourList, mHourList.indexOf(mHourText.toInt().xx()))
+        mSecond.setData(mSecondList, mSecondList.indexOf(mSecondText.toInt().xx()))
         setDay()
         mYear.onSelect = { value, _ ->
             mYearText = value
@@ -113,13 +123,13 @@ class DateAndTimePopupWindow(
 
     private fun setDay() {
         mDayList = getMutList(1, DateKt.getDay(mYearText.toInt(), mMonthText.toInt()))
-        mDay.setData(mDayList, mDayList.indexOf(mDayText))
+        mDay.setData(mDayList, mDayList.indexOf(mDayText.toInt().xx()))
     }
 
     private fun getMutList(startNumber: Int, endNumber: Int): MutableList<String> {
         return mutableListOf<String>().apply {
             (startNumber..endNumber).forEach {
-                add(it.toString())
+                add(it.xx())
             }
         }
     }

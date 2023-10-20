@@ -17,7 +17,7 @@
      <string name="step_start">Get started</string>
 
      <string name="main_home">Daily tasks</string>
-     <string name="main_history">Record</string>
+     <string name="main_record">Record</string>
      <string name="main_news">News</string>
      <string name="main_setting">Settings</string>
      <string name="step_skip">Skip</string>
@@ -26,7 +26,6 @@
      <string name="blood_pressure_record_button">Record now</string>
      <string name="blood_pressure_record_content">Keep recording your blood pressure,\nunderstand your health status</string>
 
-     <string name="main_time">August 9</string>
 
      <string name="record_max">Maximum</string>
      <string name="record_min">Minimum</string>
@@ -40,15 +39,15 @@
      <string name="record_systolic">Systolic</string>
      <string name="record_diastolic">Diastolic</string>
 
-     <string name="record_history_add">+new</string>
-     <string name="record_history_more">More</string>
-     <string name="record_history_item_more">More>></string>
-     <string name="record_history_unit">mmHg</string>
+     <string name="record_add">+new</string>
+     <string name="record_item_more">More>></string>
+     <string name="record_unit">mmHg</string>
 
-     <string name="record_history_recent">Recent</string>
-     <string name="record_history_week">A Week</string>
-     <string name="record_history_month">A Month</string>
-     <string name="record_history_year">A Year</string>
+     <string name="record_recent">Recent</string>
+     <string name="record_week">This Week</string>
+     <string name="record_month">This Month</string>
+     <string name="record_last_month">Last Month</string>
+     <string name="record_all">All</string>
 
      <string name="record_more_no">You have no records yet! </string>
      <string name="record_more_to">Go to record</string>

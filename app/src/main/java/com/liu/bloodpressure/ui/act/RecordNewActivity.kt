@@ -1,27 +1,22 @@
 package com.liu.bloodpressure.ui.act
 
-import android.annotation.SuppressLint
 import android.content.res.ColorStateList
-import android.graphics.Color
 import android.view.Gravity
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.annotation.DrawableRes
 import androidx.appcompat.widget.AppCompatButton
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.DrawableCompat
 import com.liu.bloodpressure.R
 import com.liu.bloodpressure.base.BaseActivity
 import com.liu.bloodpressure.database.RecordDataBase
 import com.liu.bloodpressure.model.Record
-import com.liu.bloodpressure.ui.view.DateAndTimeDialog
 import com.liu.bloodpressure.ui.view.DateAndTimePopupWindow
 import com.liu.bloodpressure.ui.view.HorizontalPicker
 import com.liu.bloodpressure.ui.view.TitleView
 import com.liu.bloodpressure.util.DateKt
-import com.liu.bloodpressure.util.IntentName
-import com.liu.bloodpressure.util.PageType
+import com.liu.bloodpressure.util.type.IntentName
+import com.liu.bloodpressure.util.type.PageType
 import com.liu.bloodpressure.util.dp2px
 import com.liu.bloodpressure.util.toast
 import kotlinx.coroutines.CoroutineScope
@@ -115,12 +110,14 @@ class RecordNewActivity : BaseActivity() {
             diastolic = diastolicValue
             recordTime = mTime.text.toString()
             degree = degreeType
+            showTime = DateKt.getMills(mTime.text.toString()) / 1000
         }?:Record(
             systolic = systolicValue,
             diastolic = diastolicValue,
             recordTime = mTime.text.toString(),
             degree = degreeType,
-            changeTime = System.currentTimeMillis()
+            changeTime = System.currentTimeMillis(),
+            showTime = DateKt.getMills(mTime.text.toString())/ 1000
         )
         RecordDataBase.getDatabase(context = this).recordDao().let {
             when (pageType) {
@@ -137,7 +134,7 @@ class RecordNewActivity : BaseActivity() {
 
     private fun createDialog() {
         DateAndTimePopupWindow(context = this, currTime = mTime.text.toString(), clickSure = {
-            mTime.text = it
+            mTime.text = DateKt.getDate(it)
         }).showAtLocation(findViewById(R.id.record_new_parent), Gravity.BOTTOM, 0, 0)
 //        window.setBackgroundDrawable(ContextCompat.getDrawable(this,R.drawable.bg_btn_add_new_record))
     }

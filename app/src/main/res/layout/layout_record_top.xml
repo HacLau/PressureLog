@@ -14,34 +14,34 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/record_history_new"
+            android:id="@+id/record_new"
             android:layout_width="100dp"
             android:layout_height="34dp"
             android:background="@drawable/bg_btn_add_new_record"
             android:gravity="center"
-            android:text="@string/record_history_add"
+            android:text="@string/record_add"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_14"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/record_history_more"
+            android:id="@+id/record_more"
             android:layout_width="66dp"
             android:layout_height="34dp"
             android:layout_marginStart="12dp"
-            android:background="@drawable/bg_btn_history_more"
+            android:background="@drawable/bg_btn_record_more"
             android:gravity="center"
-            android:text="@string/record_history_more"
+            android:text="@string/record_more"
             android:textColor="@color/color_24"
             android:textSize="@dimen/sp_14"
-            app:layout_constraintStart_toEndOf="@id/record_history_new"
+            app:layout_constraintStart_toEndOf="@id/record_new"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <ImageView
-        android:id="@+id/record_history_heart"
+        android:id="@+id/record_heart"
         android:layout_width="330dp"
         android:layout_height="167dp"
         android:layout_marginTop="12dp"
@@ -63,12 +63,12 @@
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
         app:layout_constraintEnd_toStartOf="@id/ll_diastolic"
-        app:layout_constraintStart_toStartOf="@id/record_history_heart"
-        app:layout_constraintTop_toBottomOf="@id/record_history_heart">
+        app:layout_constraintStart_toStartOf="@id/record_heart"
+        app:layout_constraintTop_toBottomOf="@id/record_heart">
 
         <TextView
 
-            android:id="@+id/record_history_systolic_text"
+            android:id="@+id/record_systolic_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/record_systolic"
@@ -79,22 +79,22 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/record_history_systolic"
+            android:id="@+id/record_systolic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="124"
             android:textColor="@color/main_color"
             android:textSize="@dimen/sp_24"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/record_history_systolic_unit"
-            app:layout_constraintStart_toEndOf="@id/record_history_systolic_text"
+            app:layout_constraintEnd_toStartOf="@id/record_systolic_unit"
+            app:layout_constraintStart_toEndOf="@id/record_systolic_text"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/record_history_systolic_unit"
+            android:id="@+id/record_systolic_unit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/record_history_unit"
+            android:text="@string/record_unit"
             android:textColor="@color/color_83"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -112,13 +112,13 @@
         android:orientation="horizontal"
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
-        app:layout_constraintEnd_toEndOf="@id/record_history_heart"
+        app:layout_constraintEnd_toEndOf="@id/record_heart"
         app:layout_constraintStart_toEndOf="@id/ll_systolic"
-        app:layout_constraintTop_toBottomOf="@id/record_history_heart">
+        app:layout_constraintTop_toBottomOf="@id/record_heart">
 
         <TextView
 
-            android:id="@+id/record_history_diastolic_text"
+            android:id="@+id/record_diastolic_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/record_diastolic"
@@ -129,22 +129,22 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/record_history_diastolic"
+            android:id="@+id/record_diastolic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="97"
             android:textColor="@color/main_color"
             android:textSize="@dimen/sp_24"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/record_history_diastolic_unit"
-            app:layout_constraintStart_toEndOf="@id/record_history_diastolic_text"
+            app:layout_constraintEnd_toStartOf="@id/record_diastolic_unit"
+            app:layout_constraintStart_toEndOf="@id/record_diastolic_text"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/record_history_diastolic_unit"
+            android:id="@+id/record_diastolic_unit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/record_history_unit"
+            android:text="@string/record_unit"
             android:textColor="@color/color_83"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -174,15 +174,15 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/main_history"
+            android:text="@string/main_record"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/record_history_item_more"
+            android:id="@+id/record_item_more"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/record_history_item_more"
+            android:text="@string/record_item_more"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>

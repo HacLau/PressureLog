@@ -217,7 +217,7 @@ class HorizontalPicker : View {
     }
 
     private fun getSelectedString(): String {
-        return if (strings.isNotEmpty()) strings[index]!! else ""
+        return if (strings.isNotEmpty()) strings[index] else ""
     }
 
 }

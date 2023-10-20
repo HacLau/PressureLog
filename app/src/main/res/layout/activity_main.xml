@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/record_new_parent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.act.MainActivity">
@@ -11,14 +12,12 @@
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_marginTop="24dp"
-        app:leftText="@string/main_time"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/vp_main"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toTopOf="@id/rg_main"
         app:layout_constraintTop_toBottomOf="@id/title_main" />
 
@@ -44,12 +43,12 @@
             android:textSize="@dimen/sp_12" />
 
         <RadioButton
-            android:id="@+id/rb_main_history"
+            android:id="@+id/rb_main_record"
             style="@style/radiobutton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableTop="@drawable/main_history"
-            android:text="@string/main_history"
+            android:drawableTop="@drawable/main_record"
+            android:text="@string/main_record"
             android:textSize="@dimen/sp_12" />
 
         <RadioButton

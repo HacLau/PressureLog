@@ -1,18 +1,16 @@
 package com.liu.bloodpressure.ui.act
 
-import android.os.Build
 import android.view.View
 import android.webkit.WebView
 import android.widget.ImageView
 import android.widget.ScrollView
 import android.widget.TextView
-import androidx.annotation.RequiresApi
 import com.liu.bloodpressure.R
 import com.liu.bloodpressure.base.BaseActivity
 import com.liu.bloodpressure.model.News
 import com.liu.bloodpressure.ui.view.TitleView
-import com.liu.bloodpressure.util.IntentName
-import com.liu.bloodpressure.util.PageType
+import com.liu.bloodpressure.util.type.IntentName
+import com.liu.bloodpressure.util.type.PageType
 
 class WebViewActivity : BaseActivity() {
     private lateinit var mTitleView: TitleView

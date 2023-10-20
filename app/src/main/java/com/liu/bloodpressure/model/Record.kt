@@ -11,7 +11,7 @@ data class BloodEntity(
     var mainTop: News? = null,
     var news: News? = null,
     var record: Record? = null,
-    var historyTop: HistoryTop? = null,
+    var recordTop: RecordTop? = null,
     var settingTop: Setting? = null,
     var setting: Setting? = null
 )
@@ -28,15 +28,17 @@ data class News(
 @Parcelize
 @Entity
 data class Record(
+    @PrimaryKey(autoGenerate = true)
+    var id: Int = 0,
     var systolic: Int,
     var diastolic: Int,
     var degree: Int,
-    @PrimaryKey
     var recordTime: String,
-    var changeTime:Long
+    var changeTime: Long,
+    var showTime: Long
 ) : Parcelable
 
-data class HistoryTop(
+data class RecordTop(
     var systolic: Int,
     var diastolic: Int
 )
@@ -50,20 +52,5 @@ data class Setting(
 )
 
 
-object ItemType {
-    val MAINTOP = 1
-    val NEWS = 2
-    val RECORD = 3
-    val HISTORYTOP = 4
-    val SETTINGTOP = 5
-    val SETTING = 6
-}
 
-object Degree {
-    val NORMAL = "normal"
-    val RELAXED = "relaxed"
-    val ORDINARY = "ordinary"
-    val SEVERITY = "severity"
-    val DANGER = "danger"
-    val DESTORY = "destory"
-}
+

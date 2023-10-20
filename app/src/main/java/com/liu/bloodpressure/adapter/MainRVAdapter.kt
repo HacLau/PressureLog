@@ -2,7 +2,6 @@ package com.liu.bloodpressure.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +12,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.liu.bloodpressure.R
 import com.liu.bloodpressure.model.BloodEntity
-import com.liu.bloodpressure.model.ItemType
+import com.liu.bloodpressure.util.type.ItemType
 
 class MainRVAdapter(
     private val context: Context,
@@ -36,8 +35,8 @@ class MainRVAdapter(
                 RecordViewHolder(LayoutInflater.from(context).inflate(R.layout.layout_record_item, null, false))
             }
 
-            ItemType.HISTORYTOP -> {
-                HistoryTopViewHolder(LayoutInflater.from(context).inflate(R.layout.layout_hitsory_record_top, null, false))
+            ItemType.RECORDTOP -> {
+                RecordTopViewHolder(LayoutInflater.from(context).inflate(R.layout.layout_record_top, null, false))
             }
 
             ItemType.SETTINGTOP -> {
@@ -123,12 +122,13 @@ class MainRVAdapter(
                         }
                         holder.time.text = it.recordTime
                         holder.icon.background = when (it.degree) {
+
                             0 -> {
-                                ContextCompat.getDrawable(context, R.mipmap.ic_degree_0)
+                                ContextCompat.getDrawable(context, R.mipmap.ic_degree_1)
                             }
 
                             1 -> {
-                                ContextCompat.getDrawable(context, R.mipmap.ic_degree_1)
+                                ContextCompat.getDrawable(context, R.mipmap.ic_degree_0)
                             }
 
                             2 -> {
@@ -158,9 +158,9 @@ class MainRVAdapter(
                 }
             }
 
-            ItemType.HISTORYTOP -> {
-                if (holder is HistoryTopViewHolder) {
-                    data[position].historyTop?.let {
+            ItemType.RECORDTOP -> {
+                if (holder is RecordTopViewHolder) {
+                    data[position].recordTop?.let {
                         holder.recordNew.setOnClickListener {
                             recordNew.invoke()
                         }
@@ -259,12 +259,12 @@ class MainRVAdapter(
         var recordItem: ConstraintLayout = view.findViewById(R.id.record_item)
     }
 
-    inner class HistoryTopViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        var recordNew: TextView = view.findViewById(R.id.record_history_new)
-        var recordMore: TextView = view.findViewById(R.id.record_history_more)
-        var systolic: TextView = view.findViewById(R.id.record_history_systolic)
-        var diastolic: TextView = view.findViewById(R.id.record_history_diastolic)
-        var recordItemMore: TextView = view.findViewById(R.id.record_history_item_more)
+    inner class RecordTopViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        var recordNew: TextView = view.findViewById(R.id.record_new)
+        var recordMore: TextView = view.findViewById(R.id.record_more)
+        var systolic: TextView = view.findViewById(R.id.record_systolic)
+        var diastolic: TextView = view.findViewById(R.id.record_diastolic)
+        var recordItemMore: TextView = view.findViewById(R.id.record_item_more)
         var clMore: ConstraintLayout = view.findViewById(R.id.cl_more)
     }
 

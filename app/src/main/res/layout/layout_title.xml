@@ -63,7 +63,7 @@
             android:layout_height="wrap_content"
             android:drawableEnd="@mipmap/ic_record_more"
             android:lineHeight="17sp"
-            android:text="@string/record_history_recent"
+            android:text="@string/record_recent"
             android:textColor="@color/main_color"
             android:textSize="@dimen/sp_12"
             app:layout_constraintBottom_toBottomOf="parent"

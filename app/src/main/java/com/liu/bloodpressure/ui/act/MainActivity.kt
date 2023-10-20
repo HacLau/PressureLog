@@ -5,7 +5,6 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.RadioGroup
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
@@ -19,17 +18,18 @@ import com.liu.bloodpressure.adapter.MainRVAdapter
 import com.liu.bloodpressure.base.BaseActivity
 import com.liu.bloodpressure.database.RecordDataBase
 import com.liu.bloodpressure.model.BloodEntity
-import com.liu.bloodpressure.model.HistoryTop
 import com.liu.bloodpressure.model.News
-import com.liu.bloodpressure.model.Record
-import com.liu.bloodpressure.model.ItemType
+import com.liu.bloodpressure.model.RecordTop
 import com.liu.bloodpressure.model.Setting
+import com.liu.bloodpressure.ui.view.Decoration
+import com.liu.bloodpressure.ui.view.RecordPopupWindow
 import com.liu.bloodpressure.ui.view.TitleView
 import com.liu.bloodpressure.util.AssetsKt
-import com.liu.bloodpressure.util.Decoration
-import com.liu.bloodpressure.util.PageType
+import com.liu.bloodpressure.util.DateKt
 import com.liu.bloodpressure.util.ResourceKt
-import com.liu.bloodpressure.util.logE
+import com.liu.bloodpressure.util.type.ItemType
+import com.liu.bloodpressure.util.type.PageType
+import com.liu.bloodpressure.util.type.RecordType
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -41,13 +41,14 @@ class MainActivity : BaseActivity() {
     private lateinit var mViewPager: ViewPager
     private lateinit var mTitleMain: TitleView
     private var homeList: MutableList<BloodEntity> = mutableListOf()
-    private var historyList: MutableList<BloodEntity> = mutableListOf()
+    private var recordList: MutableList<BloodEntity> = mutableListOf()
     private var newsList: MutableList<BloodEntity> = mutableListOf()
     private var settingList: MutableList<BloodEntity> = mutableListOf()
     private lateinit var homeRecyclerView: RecyclerView
-    private lateinit var historyRecyclerView: RecyclerView
+    private lateinit var recordRecyclerView: RecyclerView
     private lateinit var newsRecyclerView: RecyclerView
     private lateinit var settingRecyclerView: RecyclerView
+    private var recordType = RecordType.ALL
     override fun contentLayout(): Int {
         return R.layout.activity_main
     }
@@ -59,13 +60,23 @@ class MainActivity : BaseActivity() {
     }
 
     override fun initData() {
+        mTitleMain.rightButton.setOnClickListener {
+            RecordPopupWindow(context = this, onClick = {
+                if (recordType == it) {
+                    return@RecordPopupWindow
+                }
+                mTitleMain.rightButtonText.text = it
+                recordType = it
+                setRecordList()
+            }).showAsDropDown(mTitleMain.rightButton)
+        }
         mRadioGroup.setOnCheckedChangeListener { _, checkId ->
             when (checkId) {
                 R.id.rb_main_home -> {
                     mViewPager.currentItem = 0
                 }
 
-                R.id.rb_main_history -> {
+                R.id.rb_main_record -> {
                     mViewPager.currentItem = 1
                 }
 
@@ -81,7 +92,7 @@ class MainActivity : BaseActivity() {
 
         mViewPager.adapter = MainAdapter(mutableListOf<View>().apply {
             add(mainHome())
-            add(mainHistory())
+            add(mainRecord())
             add(mainNews())
             add(mainSetting())
         })
@@ -94,26 +105,30 @@ class MainActivity : BaseActivity() {
                 when (position) {
                     0 -> {
                         mRadioGroup.check(R.id.rb_main_home)
-                        mTitleMain.leftText.text = getString(R.string.main_time)
+                        mTitleMain.leftText.text = "${DateKt.getDay()} ${DateKt.getMonth(DateKt.getMonth() + 1)}"
                         mTitleMain.rightButton.visibility = View.GONE
+                        setHomeList()
                     }
 
                     1 -> {
-                        mRadioGroup.check(R.id.rb_main_history)
-                        mTitleMain.leftText.text = getString(R.string.main_history)
+                        mRadioGroup.check(R.id.rb_main_record)
+                        mTitleMain.leftText.text = getString(R.string.main_record)
                         mTitleMain.rightButton.visibility = View.GONE
+                        setRecordList()
                     }
 
                     2 -> {
                         mRadioGroup.check(R.id.rb_main_news)
                         mTitleMain.leftText.text = getString(R.string.main_news)
                         mTitleMain.rightButton.visibility = View.GONE
+                        setNewsList()
                     }
 
                     3 -> {
                         mRadioGroup.check(R.id.rb_main_setting)
                         mTitleMain.leftText.text = getString(R.string.main_setting)
                         mTitleMain.rightButton.visibility = View.GONE
+                        setSettingList()
                     }
                 }
             }
@@ -123,6 +138,8 @@ class MainActivity : BaseActivity() {
             }
 
         })
+        mTitleMain.leftText.text = "${DateKt.getDay()} ${DateKt.getMonth(DateKt.getMonth() + 1)}"
+        setListData()
     }
 
     private fun mainHome(): View {
@@ -136,12 +153,12 @@ class MainActivity : BaseActivity() {
         return view
     }
 
-    private fun mainHistory(): View {
-        val view: View = LayoutInflater.from(this).inflate(R.layout.fragment_history, null, false)
-        historyRecyclerView = view.findViewById<RecyclerView>(R.id.history_rv)
-        historyRecyclerView.addItemDecoration(Decoration(6))
-        historyRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        historyRecyclerView.adapter = MainRVAdapter(context = this, data = historyList).apply {
+    private fun mainRecord(): View {
+        val view: View = LayoutInflater.from(this).inflate(R.layout.fragment_record, null, false)
+        recordRecyclerView = view.findViewById<RecyclerView>(R.id.record_rv)
+        recordRecyclerView.addItemDecoration(Decoration(6))
+        recordRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        recordRecyclerView.adapter = MainRVAdapter(context = this, data = recordList).apply {
             setInvoke(this)
         }
         return view
@@ -171,20 +188,14 @@ class MainActivity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
-        setListData()
     }
 
     @SuppressLint("NotifyDataSetChanged")
     private fun setListData() {
         setHomeList()
-        setHistoryList()
+        setRecordList()
         setNewsList()
         setSettingList()
-
-        (homeRecyclerView.adapter as MainRVAdapter).setData(homeList)
-        (historyRecyclerView.adapter as MainRVAdapter).setData(historyList)
-        (newsRecyclerView.adapter as MainRVAdapter).setData(newsList)
-        (settingRecyclerView.adapter as MainRVAdapter).setData(settingList)
     }
 
 
@@ -210,39 +221,63 @@ class MainActivity : BaseActivity() {
                 add(BloodEntity(type = ItemType.NEWS, news = it))
             }
         }
+        (homeRecyclerView.adapter as MainRVAdapter).setData(homeList)
     }
 
-    private fun setHistoryList() {
-        historyList = mutableListOf<BloodEntity>().apply {
+    private fun setRecordList() {
+        recordList = mutableListOf<BloodEntity>().apply {
+            add(0, BloodEntity(type = ItemType.RECORDTOP, recordTop = RecordTop(systolic = 0, diastolic = 0)))
             CoroutineScope(Dispatchers.IO + SupervisorJob()).launch {
                 kotlin.runCatching {
-                    val list = RecordDataBase.getDatabase(this@MainActivity).recordDao().queryAll()
                     var sys = 0
                     var dia = 0
-                    list.forEach {
-                        sys += it.systolic
-                        dia += it.diastolic
-                    }
-                    add(
-                        BloodEntity(
-                            type = ItemType.HISTORYTOP,
-                            historyTop = HistoryTop(systolic = sys.div(list.size), diastolic = dia.div(list.size))
-                        )
-                    )
-                    list.let {
+                    RecordDataBase.getDatabase(this@MainActivity).recordDao().let {
+                        when (recordType) {
+                            RecordType.RECENT -> {
+                                it.queryRecent()
+                            }
+
+                            RecordType.WEEK -> {
+                                it.queryWeek()
+                            }
+
+                            RecordType.MONTH -> {
+                                it.queryMonth()
+                            }
+
+                            RecordType.LASTMONTH -> {
+                                it.queryLastMonth()
+                            }
+                            RecordType.ALL -> {
+                                it.queryAll()
+                            }
+
+                            else -> {
+                                it.queryAll()
+                            }
+                        }
+                    }.let {
                         it.subList(
-                            0, if (it.size > 3) {
-                                3
+                            0, if (it.size > 10) {
+                                10
                             } else {
                                 it.size
                             }
-                        )
-                    }.forEach {
-                        add(BloodEntity(type = ItemType.RECORD, record = it))
+                        ).forEach {record->
+                            sys += record.systolic
+                            dia += record.diastolic
+                            add(BloodEntity(type = ItemType.RECORD, record = record))
+                        }
                     }
+                    get(0).recordTop.apply {
+                        this?.systolic = if(isEmpty()) 0 else sys.div(size)
+                        this?.diastolic = if(isEmpty()) 0 else dia.div(size)
+                    }
+
                 }
             }
         }
+        (recordRecyclerView.adapter as MainRVAdapter).setData(recordList)
     }
 
     private fun setNewsList() {
@@ -255,6 +290,7 @@ class MainActivity : BaseActivity() {
                 add(BloodEntity(type = ItemType.NEWS, news = it))
             }
         }
+        (newsRecyclerView.adapter as MainRVAdapter).setData(newsList)
     }
 
     private fun setSettingList() {
@@ -276,6 +312,7 @@ class MainActivity : BaseActivity() {
             }
 
         }
+        (settingRecyclerView.adapter as MainRVAdapter).setData(settingList)
     }
 
 
@@ -289,7 +326,7 @@ class MainActivity : BaseActivity() {
         adapter.itemClick = {
             when (it.type) {
                 ItemType.MAINTOP,
-                ItemType.HISTORYTOP,
+                ItemType.RECORDTOP,
                 ItemType.SETTINGTOP -> {
                 }
 

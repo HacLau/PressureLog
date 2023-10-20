@@ -17,6 +17,7 @@ class TitleView : ConstraintLayout {
     lateinit var rightText: TextView
     lateinit var rightImage: ImageView
     lateinit var rightButton: ConstraintLayout
+    lateinit var rightButtonText: TextView
 
     constructor(context: Context) : super(context) {
         initView(context)
@@ -61,5 +62,6 @@ class TitleView : ConstraintLayout {
         rightImage = view.findViewById(R.id.title_right_image)
         rightText = view.findViewById(R.id.title_right_text)
         rightButton = view.findViewById(R.id.title_right_button)
+        rightButtonText = view.findViewById(R.id.title_right_button_text)
     }
 }

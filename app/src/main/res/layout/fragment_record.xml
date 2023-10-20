@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.fram.HistoryFragment">
+    tools:context=".ui.fram.RecordFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/history_rv"
+        android:id="@+id/record_rv"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         app:layout_constraintStart_toStartOf="parent"
