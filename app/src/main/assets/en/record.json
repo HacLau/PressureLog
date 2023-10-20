@@ -1,0 +1,26 @@
+[
+  {
+    "systolic": 127,
+    "diastolic": 86,
+    "iconUrl": -1,
+    "degree": 1,
+    "recordTime": "2023-10-19 14:35",
+    "recordicon": -1
+  },
+  {
+    "systolic": 127,
+    "diastolic": 86,
+    "iconUrl": -1,
+    "degree": 2,
+    "recordTime": "2023-10-19 14:35",
+    "recordicon": -1
+  },
+  {
+    "systolic": 127,
+    "diastolic": 86,
+    "iconUrl": -1,
+    "degree": 3,
+    "recordTime": "2023-10-19 14:35",
+    "recordicon": -1
+  }
+]

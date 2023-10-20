@@ -1,0 +1,102 @@
+<resources>
+     <string name="app_name">BloodPressure</string>
+
+     <string name="privacy">Check to agree to the user policy and privacy agreement</string>
+
+     <string name="step1_title">Protecting the heart starts with healthy blood pressure</string>
+     <string name="step2_title">Understand blood pressure trends and predict a healthy future</string>
+     <string name="step3_title">Record blood pressure and grasp the pulse of health</string>
+
+     <string name="step1_content">Understand the importance of blood pressure and master the first step to maintain cardiovascular health</string>
+     <string name="step2_content">Understand the importance of blood pressure and master the first step to maintain cardiovascular health</string>
+     <string name="step3_content">Understand the importance of blood pressure and master the first step to maintain cardiovascular health</string>
+
+     <string name="start_check_toast">Please check the User Privacy Agreement</string>
+
+     <string name="step_next">Next step</string>
+     <string name="step_start">Get started</string>
+
+     <string name="main_home">Daily tasks</string>
+     <string name="main_history">Record</string>
+     <string name="main_news">News</string>
+     <string name="main_setting">Settings</string>
+     <string name="step_skip">Skip</string>
+
+     <string name="blood_pressure_record_title">Blood pressure record</string>
+     <string name="blood_pressure_record_button">Record now</string>
+     <string name="blood_pressure_record_content">Keep recording your blood pressure,\nunderstand your health status</string>
+
+     <string name="main_time">August 9</string>
+
+     <string name="record_max">Maximum</string>
+     <string name="record_min">Minimum</string>
+     <string name="record_avg">Average</string>
+
+     <string name="record_normal">Normal</string>
+     <string name="record_danger">Danger</string>
+     <string name="record_more">More</string>
+     <string name="record_new">New</string>
+     <string name="record_save">Save</string>
+     <string name="record_systolic">Systolic</string>
+     <string name="record_diastolic">Diastolic</string>
+
+     <string name="record_history_add">+new</string>
+     <string name="record_history_more">More</string>
+     <string name="record_history_item_more">More>></string>
+     <string name="record_history_unit">mmHg</string>
+
+     <string name="record_history_recent">Recent</string>
+     <string name="record_history_week">A Week</string>
+     <string name="record_history_month">A Month</string>
+     <string name="record_history_year">A Year</string>
+
+     <string name="record_more_no">You have no records yet! </string>
+     <string name="record_more_to">Go to record</string>
+
+     <string name="setting_clock">Alarm clock</string>
+     <string name="setting_language">Set language</string>
+     <string name="setting_time">Setting time</string>
+
+     <string name="btn_cancel">Cancel</string>
+     <string name="btn_confirm">Confirm</string>
+     <string name="btn_save">Save</string>
+
+     <string name="setting_year">Year</string>
+     <string name="setting_month">Month</string>
+     <string name="setting_day">Day</string>
+     <string name="setting_hour">hour</string>
+     <string name="setting_second">Min</string>
+
+     <string name="setting_share">Share with friends</string>
+     <string name="setting_privacy">Privacy settings</string>
+     <string name="setting_policy">User Agreement</string>
+
+     <string name="degree_title_hypotension">Hypotension</string>
+     <string name="degree_title_normal">Normal</string>
+     <string name="degree_title_elevated">High</string>
+     <string name="degree_title_hs1">Stage 1</string>
+     <string name="degree_title_hs2">Stage 2</string>
+     <string name="degree_title_crisis">Hypertension</string>
+
+     <string name="degree_content_hypotension">(sys &lt;90 &amp; dia &lt;60)</string>
+     <string name="degree_content_normal">(sys 90–119 &amp; dia 60–79)</string>
+     <string name="degree_content_elevated">(sys 120–129 &amp; dia 60–79)</string>
+     <string name="degree_content_hs1">(sys 130–139 &amp; dia 80–89)</string>
+     <string name="degree_content_hs2">(sys 140–180 &amp; dia 90–120)</string>
+     <string name="degree_content_crisis">(sys 180+ &amp; dia 120+)</string>
+
+     <string name="degree_des_hypotension">Hypotension</string>
+     <string name="degree_des_normal">Don’t worry! Your blood pressure is very good, try to keep it up! </string>
+     <string name="degree_des_elevated">High blood pressure</string>
+     <string name="degree_des_hs1">Hypertension Stage 1</string>
+     <string name="degree_des_hs2">Hypertension Stage 2</string>
+     <string name="degree_des_crisis">Hypertension</string>
+
+     <string name="toast_record_new">There may be an error in the entered data, please check and re-enter the correct systolic and diastolic values.</string>
+
+
+     <string name="web_from">Source: https://medlineplus.gov/highbloodpressure.html</string>
+     <string name="web_content">Blood pressure is the force of blood pushing against artery walls. Every time the heart beats, blood is pumped into the arteries. Blood pressure is highest when the heart is beating and pumping blood. This is called systolic blood pressure. When your heart is at rest, your blood pressure drops between beats. This is called diastolic blood pressure. Your blood pressure readings use these two numbers. Usually systolic blood pressure values are higher or higher than diastolic blood pressure values. For example, 120/80 means a systolic blood pressure of 120 and a diastolic blood pressure of 80.
+This is called systolic blood pressure. When your heart is at rest, your blood pressure drops between beats. This is called diastolic blood pressure. Your blood pressure readings use these two numbers. Usually systolic blood pressure values are higher or higher than diastolic blood pressure values. For example, 120/80 means a systolic blood pressure of 120 and a diastolic blood pressure of 80. </string>
+
+</resources>

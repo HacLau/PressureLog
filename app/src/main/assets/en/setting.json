@@ -1,0 +1,32 @@
+[
+  {
+    "title": "Clock",
+    "type": 1,
+    "content": ""
+  },
+  {
+    "title": "Language",
+    "type": 2,
+    "content": ""
+  },
+  {
+    "title": "Shared",
+    "type": 3,
+    "content": ""
+  },
+  {
+    "title": "Privacy",
+    "type": 4,
+    "content": ""
+  },
+  {
+    "title": "Policy",
+    "type": 5,
+    "content": ""
+  },
+  {
+    "title": "Contact",
+    "type": 6,
+    "content": "abc@gmail.com"
+  }
+]

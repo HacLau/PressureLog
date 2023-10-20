@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ll_new_more"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/record_history_new"
+            android:layout_width="100dp"
+            android:layout_height="34dp"
+            android:background="@drawable/bg_btn_add_new_record"
+            android:gravity="center"
+            android:text="@string/record_history_add"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/record_history_more"
+            android:layout_width="66dp"
+            android:layout_height="34dp"
+            android:layout_marginStart="12dp"
+            android:background="@drawable/bg_btn_history_more"
+            android:gravity="center"
+            android:text="@string/record_history_more"
+            android:textColor="@color/color_24"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintStart_toEndOf="@id/record_history_new"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <ImageView
+        android:id="@+id/record_history_heart"
+        android:layout_width="330dp"
+        android:layout_height="167dp"
+        android:layout_marginTop="12dp"
+        android:src="@mipmap/ic_record_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_new_more" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ll_systolic"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="6dp"
+        android:layout_weight="1"
+        android:background="@drawable/bg_record_item_12"
+        android:orientation="horizontal"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        app:layout_constraintEnd_toStartOf="@id/ll_diastolic"
+        app:layout_constraintStart_toStartOf="@id/record_history_heart"
+        app:layout_constraintTop_toBottomOf="@id/record_history_heart">
+
+        <TextView
+
+            android:id="@+id/record_history_systolic_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/record_systolic"
+            android:textColor="@color/color_24"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/record_history_systolic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="124"
+            android:textColor="@color/main_color"
+            android:textSize="@dimen/sp_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/record_history_systolic_unit"
+            app:layout_constraintStart_toEndOf="@id/record_history_systolic_text"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/record_history_systolic_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/record_history_unit"
+            android:textColor="@color/color_83"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ll_diastolic"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="12dp"
+        android:layout_weight="1"
+        android:background="@drawable/bg_record_item_12"
+        android:orientation="horizontal"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        app:layout_constraintEnd_toEndOf="@id/record_history_heart"
+        app:layout_constraintStart_toEndOf="@id/ll_systolic"
+        app:layout_constraintTop_toBottomOf="@id/record_history_heart">
+
+        <TextView
+
+            android:id="@+id/record_history_diastolic_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/record_diastolic"
+            android:textColor="@color/color_24"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/record_history_diastolic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="97"
+            android:textColor="@color/main_color"
+            android:textSize="@dimen/sp_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/record_history_diastolic_unit"
+            app:layout_constraintStart_toEndOf="@id/record_history_diastolic_text"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/record_history_diastolic_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/record_history_unit"
+            android:textColor="@color/color_83"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/chart"
+        android:layout_width="0dp"
+        android:layout_height="217dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_record_item_12"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@id/ll_diastolic"
+        app:layout_constraintStart_toStartOf="@id/ll_systolic"
+        app:layout_constraintTop_toBottomOf="@id/ll_systolic" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_more"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="@id/chart"
+        app:layout_constraintStart_toStartOf="@id/chart"
+        app:layout_constraintTop_toBottomOf="@id/chart">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/main_history"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/record_history_item_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/record_history_item_more"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

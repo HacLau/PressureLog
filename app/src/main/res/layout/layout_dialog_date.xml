@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bg_dialog_date"
+        android:layout_width="336dp"
+        android:layout_height="495dp"
+        android:background="@drawable/bg_dialog_date_selected"
+        android:paddingStart="20dp"
+        android:paddingTop="16dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/dialog_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lineHeight="@dimen/sp_22"
+            android:text="@string/setting_time"
+            android:textColor="@color/color_24"
+            android:textSize="@dimen/sp_16"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_year"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lineHeight="@dimen/sp_18"
+            android:text="@string/setting_year"
+            android:textColor="@color/color_24"
+            android:textSize="@dimen/sp_13"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/dialog_title" />
+
+        <com.liu.bloodpressure.ui.view.HorizontalPicker
+            android:id="@+id/hp_year"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_year"
+            app:normalTextColor="@color/hp_normal"
+            app:selectedTextColor="@color/hp_selected" />
+
+        <View
+            android:id="@+id/line_year"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/color_3083"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/hp_year" />
+
+        <TextView
+            android:id="@+id/tv_month"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:lineHeight="@dimen/sp_18"
+            android:text="@string/setting_month"
+            android:textColor="@color/color_24"
+            android:textSize="@dimen/sp_13"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/line_year" />
+
+        <com.liu.bloodpressure.ui.view.HorizontalPicker
+            android:id="@+id/hp_month"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_month"
+            app:normalTextColor="@color/hp_normal"
+            app:selectedTextColor="@color/hp_selected" />
+
+        <View
+            android:id="@+id/line_month"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/color_3083"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/hp_month" />
+
+        <TextView
+            android:id="@+id/tv_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:lineHeight="@dimen/sp_18"
+            android:text="@string/setting_day"
+            android:textColor="@color/color_24"
+            android:textSize="@dimen/sp_13"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/line_month" />
+
+        <com.liu.bloodpressure.ui.view.HorizontalPicker
+            android:id="@+id/hp_day"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_day"
+            app:normalTextColor="@color/hp_normal"
+            app:selectedTextColor="@color/hp_selected" />
+
+        <View
+            android:id="@+id/line_day"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/color_3083"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/hp_day" />
+
+        <TextView
+            android:id="@+id/tv_hour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:lineHeight="@dimen/sp_18"
+            android:text="@string/setting_hour"
+            android:textColor="@color/color_24"
+            android:textSize="@dimen/sp_13"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/line_day" />
+
+        <com.liu.bloodpressure.ui.view.HorizontalPicker
+            android:id="@+id/hp_hour"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_hour"
+            app:normalTextColor="@color/hp_normal"
+            app:selectedTextColor="@color/hp_selected" />
+
+        <View
+            android:id="@+id/line_hour"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/color_3083"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/hp_hour" />
+
+        <TextView
+            android:id="@+id/tv_second"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:lineHeight="@dimen/sp_18"
+            android:text="@string/setting_second"
+            android:textColor="@color/color_24"
+            android:textSize="@dimen/sp_13"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/line_hour" />
+
+        <com.liu.bloodpressure.ui.view.HorizontalPicker
+            android:id="@+id/hp_second"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_second"
+            app:normalTextColor="@color/hp_normal"
+            app:selectedTextColor="@color/hp_selected" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/dialog_cancel"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/bg_dialog_btn_cancel_12"
+            android:lineHeight="@dimen/sp_20"
+            android:text="@string/btn_cancel"
+            android:textColor="@color/color_24"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintEnd_toStartOf="@+id/dialog_confirm"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/hp_second" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/dialog_confirm"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_dialog_btn_confirm_12"
+            android:lineHeight="@dimen/sp_20"
+            android:text="@string/btn_save"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/dialog_cancel"
+            app:layout_constraintTop_toBottomOf="@id/hp_second" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

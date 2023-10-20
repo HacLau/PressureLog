@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="tran">#88FFFFFF</color>
+    <color name="light_blue_600">#FF039BE5</color>
+    <color name="light_blue_900">#FF01579B</color>
+    <color name="light_blue_A200">#FF40C4FF</color>
+    <color name="light_blue_A400">#FF00B0FF</color>
+    <color name="black_overlay">#66000000</color>
+    <color name="main_color">#257CFF</color>
+    <color name="color_83">#838383</color>
+    <color name="color_3083">#30838383</color>
+    <color name="E2E4E5">#E2E4E5</color>
+    <color name="color_D8">#D8D8D8</color>
+    <color name="color_24">#242424</color>
+    <color name="color_3324">#33242424</color>
+    <color name="record_item_bg">#F2F4F7</color>
+    <color name="record_current_color">#EDF4FF</color>
+
+    <color name="degree_0">#56D047</color>
+    <color name="degree_1">#0199EB</color>
+    <color name="degree_2">#FED336</color>
+    <color name="degree_3">#FFB968</color>
+    <color name="degree_4">#FF8767</color>
+    <color name="degree_5">#FE5E56</color>
+
+    <color name="hp_selected">#29272F</color>
+    <color name="hp_normal">#BABABA</color>
+</resources>

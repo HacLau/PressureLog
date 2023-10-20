@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Widget.Theme.BloodPressure.ButtonBar.Fullscreen" parent="">
+        <item name="android:background">@color/black_overlay</item>
+        <item name="android:buttonBarStyle">?android:attr/buttonBarStyle</item>
+    </style>
+
+    <style name="radiobutton">
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:drawablePadding">4dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:button">@null</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/main_text</item>
+    </style>
+
+    <declare-styleable name="FullscreenAttrs">
+        <attr name="fullscreenBackgroundColor" format="color" />
+        <attr name="fullscreenTextColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="TitleView">
+        <attr name="leftText" format="reference|string"/>
+        <attr name="leftImageVisible">
+            <enum name="visible" value="0x00000000"/>
+            <enum name="invisible" value="1"/>
+            <enum name="gone" value="0x00000008"/>
+        </attr>
+
+        <attr name="middleText" format="reference|string"/>
+
+        <attr name="rightText" format="reference|string"/>
+
+        <attr name="rightImageVisible">
+            <enum name="visible" value="0x00000000"/>
+            <enum name="invisible" value="0x00000004"/>
+            <enum name="gone" value="0x00000008"/>
+        </attr>
+
+        <attr name="rightButtonVisible">
+            <enum name="visible" value="0x00000000"/>
+            <enum name="invisible" value="0x00000004"/>
+            <enum name="gone" value="0x00000008"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="HorizontalPicker">
+        <attr name="seesize" format="integer" />
+        <attr name="selectedTextSize" format="float" />
+        <attr name="selectedTextColor" format="color|reference" />
+        <attr name="normalTextSize" format="float" />
+        <attr name="normalTextColor" format="color|reference" />
+    </declare-styleable>
+
+    <style name="popwin_anim_style" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/pop_enter_anim</item>
+        <item name="android:windowExitAnimation">@anim/pop_exit_anim</item>
+    </style>
+</resources>

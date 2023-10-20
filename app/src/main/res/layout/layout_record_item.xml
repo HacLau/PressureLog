@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/record_item"
+    android:layout_width="match_parent"
+    android:layout_height="115dp">
+
+    <ImageView
+        android:id="@+id/item_bg"
+        android:layout_width="330dp"
+        android:layout_height="115dp"
+        android:background="@drawable/bg_record_item"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/ll_max"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="14dp"
+        android:gravity="start"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="@id/item_bg"
+        app:layout_constraintTop_toTopOf="@id/item_bg">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/record_systolic"
+            android:textColor="@color/color_83"
+            android:textSize="@dimen/sp_11" />
+
+        <TextView
+            android:id="@+id/item_systolic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:text="127"
+            android:textColor="@color/color_24"
+            android:textSize="@dimen/sp_15" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ll_min"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="14dp"
+        android:gravity="end"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@id/item_bg"
+        app:layout_constraintTop_toTopOf="@id/item_bg">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/record_diastolic"
+            android:textColor="@color/color_83"
+            android:textSize="@dimen/sp_11" />
+
+        <TextView
+            android:id="@+id/item_diastolic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:text="98"
+            android:textColor="@color/color_24"
+            android:textSize="@dimen/sp_15" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/icon_degree"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="14dp"
+        app:layout_constraintBottom_toBottomOf="@id/item_bg"
+        app:layout_constraintStart_toStartOf="@id/item_bg"
+        app:layout_constraintTop_toBottomOf="@id/ll_max" />
+
+    <TextView
+        android:id="@+id/item_degree"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:text="@string/record_danger"
+        android:textColor="@color/color_24"
+        android:textSize="@dimen/sp_14"
+        app:layout_constraintBottom_toBottomOf="@id/icon_degree"
+        app:layout_constraintStart_toEndOf="@id/icon_degree"
+        app:layout_constraintTop_toTopOf="@id/icon_degree" />
+
+    <TextView
+        android:id="@+id/item_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="14dp"
+        android:text="2023-08-01 14：35"
+        android:textColor="@color/color_83"
+        android:textSize="@dimen/sp_12"
+        app:layout_constraintBottom_toBottomOf="@id/item_record_icon"
+        app:layout_constraintEnd_toStartOf="@id/item_record_icon"
+        app:layout_constraintTop_toTopOf="@id/item_record_icon" />
+
+    <ImageView
+        android:id="@+id/item_record_icon"
+        android:layout_width="29dp"
+        android:layout_height="29dp"
+        android:layout_marginEnd="14dp"
+        android:src="@mipmap/ic_record_edit_ed"
+        app:layout_constraintBottom_toBottomOf="@id/icon_degree"
+        app:layout_constraintEnd_toEndOf="@id/item_bg"
+        app:layout_constraintTop_toTopOf="@id/icon_degree" />
+</androidx.constraintlayout.widget.ConstraintLayout>
