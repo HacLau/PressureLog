@@ -18,7 +18,6 @@ import com.liu.bloodpressure.util.type.IntentName
 import com.liu.bloodpressure.util.type.PageType
 
 abstract class BaseActivity : AppCompatActivity() {
-    var country: String = "en"
     private val startActivityForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
 
     }

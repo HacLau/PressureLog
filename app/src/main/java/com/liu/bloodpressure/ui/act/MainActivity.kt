@@ -9,8 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.liu.bloodpressure.BuildConfig
 import com.liu.bloodpressure.R
 import com.liu.bloodpressure.adapter.MainAdapter
@@ -18,13 +16,13 @@ import com.liu.bloodpressure.adapter.MainRVAdapter
 import com.liu.bloodpressure.base.BaseActivity
 import com.liu.bloodpressure.database.RecordDataBase
 import com.liu.bloodpressure.model.BloodEntity
-import com.liu.bloodpressure.model.News
 import com.liu.bloodpressure.model.RecordTop
-import com.liu.bloodpressure.model.Setting
+import com.liu.bloodpressure.model.mainLocalList
+import com.liu.bloodpressure.model.newsLocalList
+import com.liu.bloodpressure.model.settingLocalList
 import com.liu.bloodpressure.ui.view.Decoration
 import com.liu.bloodpressure.ui.view.RecordPopupWindow
 import com.liu.bloodpressure.ui.view.TitleView
-import com.liu.bloodpressure.util.AssetsKt
 import com.liu.bloodpressure.util.DateKt
 import com.liu.bloodpressure.util.ResourceKt
 import com.liu.bloodpressure.util.type.ItemType
@@ -201,14 +199,10 @@ class MainActivity : BaseActivity() {
 
     private fun setHomeList() {
         homeList = mutableListOf<BloodEntity>().apply {
-            (Gson().fromJson(AssetsKt.getJson(this@MainActivity, "${country}/main.json"), object : TypeToken<News>() {}.type) as News).let {
-                it.iconUrl = R.mipmap.icon_record
+            mainLocalList.forEach {
                 add(BloodEntity(type = ItemType.MAINTOP, mainTop = it))
             }
-            (Gson().fromJson(
-                AssetsKt.getJson(this@MainActivity, "${country}/news.json"),
-                object : TypeToken<MutableList<News>>() {}.type
-            ) as MutableList<News>).let {
+            newsLocalList.let {
                 it.subList(
                     0, if (it.size > 5) {
                         5
@@ -283,10 +277,7 @@ class MainActivity : BaseActivity() {
 
     private fun setNewsList() {
         newsList = mutableListOf<BloodEntity>().apply {
-            (Gson().fromJson(
-                AssetsKt.getJson(this@MainActivity, "${country}/news.json"),
-                object : TypeToken<MutableList<News>>() {}.type
-            ) as MutableList<News>).forEach {
+            newsLocalList.forEach {
                 it.iconUrl = ResourceKt.newsIcon.random()
                 add(BloodEntity(type = ItemType.NEWS, news = it))
             }
@@ -296,10 +287,7 @@ class MainActivity : BaseActivity() {
 
     private fun setSettingList() {
         settingList = mutableListOf<BloodEntity>().apply {
-            (Gson().fromJson(
-                AssetsKt.getJson(this@MainActivity, "${country}/setting.json"),
-                object : TypeToken<MutableList<Setting>>() {}.type
-            ) as MutableList<Setting>).let {
+            settingLocalList.let {
                 for (i in 0..<it.size) {
                     if (i == 0 || i == 1 || i == it.size - 1) {
                         continue

@@ -66,10 +66,6 @@ class RecordMoreActivity : BaseActivity() {
     override fun onResume() {
         super.onResume()
         mDataList= mutableListOf<BloodEntity>().apply {
-//            (Gson().fromJson(
-//                AssetsKt.getJson(this@RecordMoreActivity, "${country}/record.json"),
-//                object : TypeToken<MutableList<Record>>() {}.type
-//            ) as MutableList<Record>)
             CoroutineScope(Dispatchers.IO + SupervisorJob()).launch {
                 kotlin.runCatching {
                     RecordDataBase.getDatabase(this@RecordMoreActivity).recordDao().queryAll().apply {

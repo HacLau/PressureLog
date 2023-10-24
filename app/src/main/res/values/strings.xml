@@ -24,7 +24,7 @@
 
      <string name="blood_pressure_record_title">Blood pressure record</string>
      <string name="blood_pressure_record_button">Record now</string>
-     <string name="blood_pressure_record_content">Keep recording your blood pressure,\nunderstand your health status</string>
+     <string name="blood_pressure_record_content">Keep recording your blood pressure, \n  understand your health status</string>
 
 
      <string name="record_max">Maximum</string>
@@ -91,11 +91,10 @@
      <string name="degree_des_hs2">Hypertension Stage 2</string>
      <string name="degree_des_crisis">Hypertension</string>
 
-     <string name="toast_record_new">There may be an error in the entered data, please check and re-enter the correct systolic and diastolic values.</string>
+     <string name="toast_record_new">There may be an error in the entered data, please check and re&#045;enter the correct systolic and diastolic values&#046;</string>
 
 
-     <string name="web_from">Source: https://medlineplus.gov/highbloodpressure.html</string>
-     <string name="web_content">Blood pressure is the force of blood pushing against artery walls. Every time the heart beats, blood is pumped into the arteries. Blood pressure is highest when the heart is beating and pumping blood. This is called systolic blood pressure. When your heart is at rest, your blood pressure drops between beats. This is called diastolic blood pressure. Your blood pressure readings use these two numbers. Usually systolic blood pressure values are higher or higher than diastolic blood pressure values. For example, 120/80 means a systolic blood pressure of 120 and a diastolic blood pressure of 80.
-This is called systolic blood pressure. When your heart is at rest, your blood pressure drops between beats. This is called diastolic blood pressure. Your blood pressure readings use these two numbers. Usually systolic blood pressure values are higher or higher than diastolic blood pressure values. For example, 120/80 means a systolic blood pressure of 120 and a diastolic blood pressure of 80. </string>
+     <string name="web_from">Source&#058; https&#058;&#047;&#047;medlineplus&#046;gov&#047;highbloodpressure&#046;html</string>
+     <string name="web_content">Blood pressure is the force of blood pushing against artery walls&#046; Every time the heart beats, blood is pumped into the arteries&#046; Blood pressure is highest when the heart is beating and pumping blood&#046; This is called systolic blood pressure&#046; When your heart is at rest, your blood pressure drops between beats&#046; This is called diastolic blood pressure&#046; Your blood pressure readings use these two numbers&#046; Usually systolic blood pressure values are higher or higher than diastolic blood pressure values&#046; For example, 120/80 means a systolic blood pressure of 120 and a diastolic blood pressure of 80&#046; \n  This is called systolic blood pressure&#046; When your heart is at rest, your blood pressure drops between beats&#046; This is called diastolic blood pressure&#046; Your blood pressure readings use these two numbers&#046; Usually systolic blood pressure values are higher or higher than diastolic blood pressure values&#046; For example, 120/80 means a systolic blood pressure of 120 and a diastolic blood pressure of 80&#046; </string>
 
 </resources>
