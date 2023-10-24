@@ -9,7 +9,7 @@ apply(plugin = "stringfog")
 configure<com.github.megatronking.stringfog.plugin.StringFogExtension> {
     implementation = "com.github.megatronking.stringfog.xor.StringFogImpl"
     enable = true
-    fogPackages = arrayOf("com.tqs.filecommander")
+    fogPackages = arrayOf("com.liu.bloodpressure")
     kg = com.github.megatronking.stringfog.plugin.kg.RandomKeyGenerator()
     mode = com.github.megatronking.stringfog.plugin.StringFogMode.bytes
 }
@@ -33,6 +33,8 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
         debug{
+            isMinifyEnabled = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
 
         }
     }

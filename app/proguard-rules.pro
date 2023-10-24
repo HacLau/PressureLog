@@ -24,4 +24,4 @@
 -dontskipnonpubliclibraryclasses
 -dontskipnonpubliclibraryclassmembers
 -optimizations !code/simplification/arithmetic,!code/simplification/cast,!field/*,!class/merging/*
--obfuscationdictionary proguard-pressurelog.txt.txt
+-obfuscationdictionary proguard-pressurelog.txt
