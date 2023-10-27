@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.liu.bloodpressure.R
 import com.liu.bloodpressure.model.BloodEntity
+import com.liu.bloodpressure.util.DateKt
 import com.liu.bloodpressure.util.type.ItemType
 
 class MainRVAdapter(
@@ -69,7 +70,6 @@ class MainRVAdapter(
                         }
                         holder.icon.setBackgroundResource(it.iconUrl)
                     }
-
                 }
             }
 
@@ -120,7 +120,7 @@ class MainRVAdapter(
                                 ""
                             }
                         }
-                        holder.time.text = it.recordTime
+                        holder.time.text = DateKt.getDate(it.showTime)
                         holder.icon.background = when (it.degree) {
 
                             0 -> {

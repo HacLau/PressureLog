@@ -47,6 +47,7 @@
      <string name="record_week">This Week</string>
      <string name="record_month">This Month</string>
      <string name="record_last_month">Last Month</string>
+     <string name="record_year">year</string>
      <string name="record_all">All</string>
 
      <string name="record_more_no">You have no records yet! </string>

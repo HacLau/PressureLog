@@ -12,7 +12,7 @@ import com.liu.bloodpressure.util.xx
 
 class DateAndTimePopupWindow(
     private val context: Context,
-    private val currTime: String = "",
+    private val currTime: Long,
     private val clickCancel: () -> Unit = {},
     private val clickSure: (Long) -> Unit
 ) : PopupWindow(context) {
@@ -25,11 +25,11 @@ class DateAndTimePopupWindow(
     private var mHour: HorizontalPicker
     private var mSecond: HorizontalPicker
 
-    private var mYearText: String = DateKt.getYear().toString()
-    private var mMonthText: String = DateKt.getMonth().toString()
-    private var mDayText: String = DateKt.getDay().toString()
-    private var mHourText: String = DateKt.getHour().toString()
-    private var mSecondText: String = DateKt.getSecond().toString()
+    private var mYearText: String = DateKt.getYear(currTime).toString()
+    private var mMonthText: String = DateKt.getMonth(currTime).toString()
+    private var mDayText: String = DateKt.getDay(currTime).toString()
+    private var mHourText: String = DateKt.getHour(currTime).toString()
+    private var mMinuteText: String = DateKt.getMinute(currTime).toString()
 
     private lateinit var mYearList: MutableList<String>
     private lateinit var mMonthList: MutableList<String>
@@ -58,7 +58,7 @@ class DateAndTimePopupWindow(
         }
 
         mConfirm.setOnClickListener {
-            DateKt.getMills("$mYearText-$mMonthText-$mDayText $mHourText:$mSecondText").let {
+            DateKt.getMills(mYearText.toInt(), mMonthText.toInt(), mDayText.toInt(), mHourText.toInt(), mMinuteText.toInt()).let {
                 if (it > System.currentTimeMillis()) {
                     "The time is incorrect,it cannot exceed te current time".toast(context)
                 } else {
@@ -68,28 +68,9 @@ class DateAndTimePopupWindow(
             }
 
         }
-        setDate()
         setData()
     }
 
-    private fun setDate() {
-        if (currTime.isBlank()) {
-            mYearText = DateKt.getYear().toString()
-            mMonthText = DateKt.getMonth().toString()
-            mDayText = DateKt.getDay(mYearText.toInt(), mMonthText.toInt()).toString()
-            mHourText = DateKt.getHour().toString()
-            mSecondText = DateKt.getSecond().toString()
-        } else {
-            currTime.replace("-", " ").replace(":", " ").split(" ").let {
-                mYearText = it[0]
-                mMonthText = it[1]
-                mDayText = it[2]
-                mHourText = it[3]
-                mSecondText = it[4]
-
-            }
-        }
-    }
 
     private fun setData() {
         mYearList = getMutList(mYearText.toInt() - 1, mYearText.toInt() + 1)
@@ -98,16 +79,16 @@ class DateAndTimePopupWindow(
         mSecondList = getMutList(0, 59)
 
         mYear.setData(mYearList, mYearList.indexOf(mYearText))
-        mMonth.setData(mMonthList, mMonthList.indexOf((mMonthText.toInt()).xx()))
+        mMonth.setData(mMonthList, mMonthList.indexOf((mMonthText.toInt() + 1).xx()))
         mHour.setData(mHourList, mHourList.indexOf(mHourText.toInt().xx()))
-        mSecond.setData(mSecondList, mSecondList.indexOf(mSecondText.toInt().xx()))
+        mSecond.setData(mSecondList, mSecondList.indexOf(mMinuteText.toInt().xx()))
         setDay()
         mYear.onSelect = { value, _ ->
             mYearText = value
             setDay()
         }
         mMonth.onSelect = { value, _ ->
-            mMonthText = value
+            mMonthText = "${value.toInt() - 1}"
             setDay()
         }
         mDay.onSelect = { value, _ ->
@@ -117,7 +98,7 @@ class DateAndTimePopupWindow(
             mHourText = value
         }
         mSecond.onSelect = { value, _ ->
-            mSecondText = value
+            mMinuteText = value
         }
     }
 

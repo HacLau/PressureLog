@@ -73,14 +73,12 @@
             android:text="@string/record_month"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_16"
-            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/menu_week" />
 
         <View
             android:layout_width="150dp"
             android:layout_height="1dp"
-            android:visibility="gone"
             android:background="@drawable/bg_record_item_12"
             app:layout_constraintBottom_toTopOf="@id/menu_last_month"
             app:layout_constraintEnd_toEndOf="parent"
@@ -96,7 +94,6 @@
             android:text="@string/record_last_month"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_16"
-            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/menu_month" />
         <View

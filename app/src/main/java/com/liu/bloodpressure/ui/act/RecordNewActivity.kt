@@ -38,12 +38,9 @@ class RecordNewActivity : BaseActivity() {
     private lateinit var mDegreeScale: ImageView
     private lateinit var mSave: AppCompatButton
 
-    private var systolicValue = 90
-    private var diastolicValue = 60
     private var currentColor: Int = R.color.degree_0
 
-    private var mRecord: Record? = null
-    private var degreeType = 0
+    private lateinit var mRecord: Record
     private var pageType: String? = null
     override fun contentLayout(): Int {
         return R.layout.activity_record_new
@@ -66,18 +63,12 @@ class RecordNewActivity : BaseActivity() {
 
     override fun initData() {
         pageType = intent.getStringExtra(IntentName.pagType)
-        when (pageType) {
-            PageType.new -> {
-
-            }
-
-            PageType.edit -> {
-                mRecord = intent.getParcelableExtra<Record>(IntentName.record)?.apply {
-                    systolicValue = this.systolic
-                    diastolicValue = this.diastolic
-                }
-            }
-        }
+        mRecord = intent.getParcelableExtra(IntentName.record) ?: Record(
+            systolic = 90,
+            diastolic = 60,
+            degree = 1,
+            showTime = System.currentTimeMillis()
+        )
 
         mTitleView.leftImage.setOnClickListener {
             finish()
@@ -85,12 +76,12 @@ class RecordNewActivity : BaseActivity() {
         mClTime.setOnClickListener {
             createDialog()
         }
-        mTime.text = mRecord?.recordTime ?: DateKt.getDate()
+        mTime.text = DateKt.getDate(mRecord.showTime)
 
         setSystolic()
         setDiastolic()
         mSave.setOnClickListener {
-            if (diastolicValue > systolicValue) {
+            if (mRecord.diastolic > mRecord.systolic) {
                 getString(R.string.toast_record_new).toast(this)
             } else {
                 CoroutineScope(Dispatchers.IO + SupervisorJob()).launch {
@@ -105,35 +96,22 @@ class RecordNewActivity : BaseActivity() {
     }
 
     private fun saveRecordData() {
-        val record = mRecord?.apply {
-            systolic = systolicValue
-            diastolic = diastolicValue
-            recordTime = mTime.text.toString()
-            degree = degreeType
-            showTime = DateKt.getMills(mTime.text.toString()) / 1000
-        }?:Record(
-            systolic = systolicValue,
-            diastolic = diastolicValue,
-            recordTime = mTime.text.toString(),
-            degree = degreeType,
-            changeTime = System.currentTimeMillis(),
-            showTime = DateKt.getMills(mTime.text.toString())/ 1000
-        )
         RecordDataBase.getDatabase(context = this).recordDao().let {
             when (pageType) {
                 PageType.new -> {
-                    it.insertRecord(record)
+                    it.insertRecord(mRecord)
                 }
 
                 PageType.edit -> {
-                    it.updateRecord(record)
+                    it.updateRecord(mRecord)
                 }
             }
         }
     }
 
     private fun createDialog() {
-        DateAndTimePopupWindow(context = this, currTime = mTime.text.toString(), clickSure = {
+        DateAndTimePopupWindow(context = this, currTime = mRecord.showTime, clickSure = {
+            mRecord.showTime = it
             mTime.text = DateKt.getDate(it)
         }).showAtLocation(findViewById(R.id.record_new_parent), Gravity.BOTTOM, 0, 0)
 //        window.setBackgroundDrawable(ContextCompat.getDrawable(this,R.drawable.bg_btn_add_new_record))
@@ -141,9 +119,9 @@ class RecordNewActivity : BaseActivity() {
 
     private fun setSystolic() {
         getMutList().let {
-            mSystolicPicker.setData(it, it.indexOf(systolicValue.toString()))
+            mSystolicPicker.setData(it, it.indexOf(mRecord.systolic.toString()))
         }
-        systolicSelected(systolicValue.toString(), 0)
+        systolicSelected(mRecord.systolic.toString(), 0)
         mSystolicPicker.onSelect = ::systolicSelected
         mSystolicPicker.onMove = ::systolicSelected
     }
@@ -157,7 +135,7 @@ class RecordNewActivity : BaseActivity() {
     }
 
     private fun systolicSelected(value: String, index: Int) {
-        systolicValue = value.toInt()
+        mRecord.systolic = value.toInt()
         val color = when (value.toInt()) {
             in 20..<90 -> {
                 R.color.degree_0
@@ -193,26 +171,26 @@ class RecordNewActivity : BaseActivity() {
 
     private fun setDiastolic() {
         getMutList().let {
-            mDiastolicPicker.setData(it, it.indexOf(diastolicValue.toString()))
+            mDiastolicPicker.setData(it, it.indexOf(mRecord.diastolic.toString()))
         }
 
-        diastolicSelected(diastolicValue.toString(), 0)
+        diastolicSelected(mRecord.diastolic.toString(), 0)
         mDiastolicPicker.onSelect = ::diastolicSelected
         mDiastolicPicker.onMove = ::diastolicSelected
     }
 
     private fun diastolicSelected(value: String, index: Int) {
-        diastolicValue = value.toInt()
+        mRecord.diastolic = value.toInt()
         val color = when (value.toInt()) {
             in 20..<60 -> {
-                when (systolicValue) {
+                when (mRecord.systolic) {
                     in 20..<90 -> R.color.degree_0
                     else -> currentColor
                 }
             }
 
             in 60..<80 -> {
-                when (systolicValue) {
+                when (mRecord.systolic) {
                     in 90..119 -> {
                         R.color.degree_1
                     }
@@ -228,21 +206,21 @@ class RecordNewActivity : BaseActivity() {
             }
 
             in 80..<90 -> {
-                when (systolicValue) {
+                when (mRecord.systolic) {
                     in 130..<140 -> R.color.degree_3
                     else -> currentColor
                 }
             }
 
             in 90..120 -> {
-                when (systolicValue) {
+                when (mRecord.systolic) {
                     in 140..<180 -> R.color.degree_4
                     else -> currentColor
                 }
             }
 
             in 121..300 -> {
-                when (systolicValue) {
+                when (mRecord.systolic) {
                     in 181..320 -> R.color.degree_5
                     else -> currentColor
                 }
@@ -265,7 +243,7 @@ class RecordNewActivity : BaseActivity() {
         currentColor = degree
         when (degree) {
             R.color.degree_0 -> {
-                degreeType = 0
+                mRecord.degree = 0
                 mDegreeTitle.text = getString(R.string.degree_title_hypotension)
                 mDegreeContent.text = getString(R.string.degree_content_hypotension)
                 mDegreeDes.text = getString(R.string.degree_des_hypotension)
@@ -273,7 +251,7 @@ class RecordNewActivity : BaseActivity() {
             }
 
             R.color.degree_1 -> {
-                degreeType = 1
+                mRecord.degree = 1
                 mDegreeTitle.text = getString(R.string.degree_title_normal)
                 mDegreeContent.text = getString(R.string.degree_content_normal)
                 mDegreeDes.text = getString(R.string.degree_des_normal)
@@ -281,7 +259,7 @@ class RecordNewActivity : BaseActivity() {
             }
 
             R.color.degree_2 -> {
-                degreeType = 2
+                mRecord.degree = 2
                 mDegreeTitle.text = getString(R.string.degree_title_elevated)
                 mDegreeContent.text = getString(R.string.degree_content_elevated)
                 mDegreeDes.text = getString(R.string.degree_des_elevated)
@@ -289,7 +267,7 @@ class RecordNewActivity : BaseActivity() {
             }
 
             R.color.degree_3 -> {
-                degreeType = 3
+                mRecord.degree = 3
                 mDegreeTitle.text = getString(R.string.degree_title_hs1)
                 mDegreeContent.text = getString(R.string.degree_content_hs1)
                 mDegreeDes.text = getString(R.string.degree_des_hs1)
@@ -297,7 +275,7 @@ class RecordNewActivity : BaseActivity() {
             }
 
             R.color.degree_4 -> {
-                degreeType = 4
+                mRecord.degree = 4
                 mDegreeTitle.text = getString(R.string.degree_title_hs2)
                 mDegreeContent.text = getString(R.string.degree_content_hs2)
                 mDegreeDes.text = getString(R.string.degree_des_hs2)
@@ -305,7 +283,7 @@ class RecordNewActivity : BaseActivity() {
             }
 
             R.color.degree_5 -> {
-                degreeType = 5
+                mRecord.degree = 5
                 mDegreeTitle.text = getString(R.string.degree_title_crisis)
                 mDegreeContent.text = getString(R.string.degree_content_crisis)
                 mDegreeDes.text = getString(R.string.degree_des_crisis)

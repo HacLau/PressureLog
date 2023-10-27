@@ -25,6 +25,7 @@ import com.liu.bloodpressure.ui.view.RecordPopupWindow
 import com.liu.bloodpressure.ui.view.TitleView
 import com.liu.bloodpressure.util.DateKt
 import com.liu.bloodpressure.util.ResourceKt
+import com.liu.bloodpressure.util.logE
 import com.liu.bloodpressure.util.type.ItemType
 import com.liu.bloodpressure.util.type.PageType
 import com.liu.bloodpressure.util.type.RecordType
@@ -32,16 +33,13 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
+import java.util.Calendar
 
 class MainActivity : BaseActivity() {
 
     private lateinit var mRadioGroup: RadioGroup
     private lateinit var mViewPager: ViewPager
     private lateinit var mTitleMain: TitleView
-    private var homeList: MutableList<BloodEntity> = mutableListOf()
-    private var recordList: MutableList<BloodEntity> = mutableListOf()
-    private var newsList: MutableList<BloodEntity> = mutableListOf()
-    private var settingList: MutableList<BloodEntity> = mutableListOf()
     private lateinit var homeRecyclerView: RecyclerView
     private lateinit var recordRecyclerView: RecyclerView
     private lateinit var newsRecyclerView: RecyclerView
@@ -58,6 +56,7 @@ class MainActivity : BaseActivity() {
     }
 
     override fun initData() {
+        mTitleMain.rightButtonText.text = recordType
         mTitleMain.rightButton.setOnClickListener {
             RecordPopupWindow(context = this, onClick = {
                 if (recordType == it) {
@@ -111,7 +110,7 @@ class MainActivity : BaseActivity() {
                     1 -> {
                         mRadioGroup.check(R.id.rb_main_record)
                         mTitleMain.leftText.text = getString(R.string.main_record)
-                        mTitleMain.rightButton.visibility = View.GONE
+                        mTitleMain.rightButton.visibility = View.VISIBLE
                         setRecordList()
                     }
 
@@ -145,7 +144,7 @@ class MainActivity : BaseActivity() {
         homeRecyclerView = view.findViewById<RecyclerView>(R.id.home_rv)
         homeRecyclerView.addItemDecoration(Decoration(6))
         homeRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        homeRecyclerView.adapter = MainRVAdapter(context = this, data = homeList).apply {
+        homeRecyclerView.adapter = MainRVAdapter(context = this, data = mutableListOf()).apply {
             setInvoke(this)
         }
         return view
@@ -156,7 +155,7 @@ class MainActivity : BaseActivity() {
         recordRecyclerView = view.findViewById<RecyclerView>(R.id.record_rv)
         recordRecyclerView.addItemDecoration(Decoration(6))
         recordRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        recordRecyclerView.adapter = MainRVAdapter(context = this, data = recordList).apply {
+        recordRecyclerView.adapter = MainRVAdapter(context = this, data = mutableListOf()).apply {
             setInvoke(this)
         }
         return view
@@ -167,7 +166,7 @@ class MainActivity : BaseActivity() {
         newsRecyclerView = view.findViewById<RecyclerView>(R.id.news_rv)
         newsRecyclerView.addItemDecoration(Decoration(6))
         newsRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        newsRecyclerView.adapter = MainRVAdapter(context = this, data = newsList).apply {
+        newsRecyclerView.adapter = MainRVAdapter(context = this, data = mutableListOf()).apply {
             setInvoke(this)
         }
         return view
@@ -178,7 +177,7 @@ class MainActivity : BaseActivity() {
         settingRecyclerView = view.findViewById<RecyclerView>(R.id.setting_rv)
         settingRecyclerView.addItemDecoration(Decoration(1))
         settingRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        settingRecyclerView.adapter = MainRVAdapter(context = this, data = settingList).apply {
+        settingRecyclerView.adapter = MainRVAdapter(context = this, data = mutableListOf()).apply {
             setInvoke(this)
         }
         return view
@@ -188,7 +187,6 @@ class MainActivity : BaseActivity() {
         super.onResume()
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     private fun setListData() {
         setHomeList()
         setRecordList()
@@ -198,7 +196,8 @@ class MainActivity : BaseActivity() {
 
 
     private fun setHomeList() {
-        homeList = mutableListOf<BloodEntity>().apply {
+
+        (homeRecyclerView.adapter as MainRVAdapter).setData(mutableListOf<BloodEntity>().apply {
             mainLocalList.forEach {
                 add(BloodEntity(type = ItemType.MAINTOP, mainTop = it))
             }
@@ -214,79 +213,82 @@ class MainActivity : BaseActivity() {
                 it.iconUrl = ResourceKt.newsIcon.random()
                 add(BloodEntity(type = ItemType.NEWS, news = it))
             }
-        }
-        (homeRecyclerView.adapter as MainRVAdapter).setData(homeList)
+        })
     }
 
     private fun setRecordList() {
-        recordList = mutableListOf<BloodEntity>().apply {
-            add(0, BloodEntity(type = ItemType.RECORDTOP, recordTop = RecordTop(systolic = 0, diastolic = 0)))
-            CoroutineScope(Dispatchers.IO + SupervisorJob()).launch {
-                kotlin.runCatching {
-                    var sys = 0
-                    var dia = 0
-                    RecordDataBase.getDatabase(this@MainActivity).recordDao().let {
-                        when (recordType) {
-                            RecordType.RECENT -> {
-                                it.queryRecent()
-                            }
 
-                            RecordType.WEEK -> {
-                                it.queryWeek()
-                            }
-
-                            RecordType.MONTH -> {
-                                it.queryMonth()
-                            }
-
-                            RecordType.LASTMONTH -> {
-                                it.queryLastMonth()
-                            }
-
-                            RecordType.ALL -> {
-                                it.queryAll()
-                            }
-
-                            else -> {
-                                it.queryAll()
-                            }
+        CoroutineScope(Dispatchers.IO + SupervisorJob()).launch {
+            kotlin.runCatching {
+                var sys = 0
+                var dia = 0
+                RecordDataBase.getDatabase(this@MainActivity).recordDao().queryAll().filter {
+                    when (recordType) {
+                        RecordType.RECENT -> {
+                            it.showTime > DateKt.getToday()
                         }
-                    }.let {
-                        it.subList(
-                            0, if (it.size > 10) {
-                                10
-                            } else {
-                                it.size
-                            }
-                        ).forEach { record ->
-                            sys += record.systolic
-                            dia += record.diastolic
-                            add(BloodEntity(type = ItemType.RECORD, record = record))
+
+                        RecordType.WEEK -> {
+                            it.showTime < DateKt.getDayOfWeek(Calendar.SATURDAY, 0) && it.showTime > DateKt.getDayOfWeek(Calendar.SUNDAY, 0)
+                        }
+
+                        RecordType.MONTH -> {
+                            it.showTime > DateKt.getThisMonth()
+                        }
+
+                        RecordType.LASTMONTH -> {
+                            it.showTime < DateKt.getThisMonth() && it.showTime > DateKt.getLastMonth()
+                        }
+
+                        else -> {
+                            it.showTime < System.currentTimeMillis()
                         }
                     }
-                    get(0).recordTop.apply {
-                        this?.systolic = if (isEmpty()) 0 else sys.div(size)
-                        this?.diastolic = if (isEmpty()) 0 else dia.div(size)
+                }.let {
+                    val recordList = mutableListOf<BloodEntity>()
+                    val list = it.subList(
+                        0, if (it.size > 5) {
+                            5
+                        } else {
+                            it.size
+                        }
+                    )
+
+                    list.forEach { record ->
+                        sys += record.systolic
+                        dia += record.diastolic
+                        recordList.add(BloodEntity(type = ItemType.RECORD, record = record))
                     }
 
+                    recordList.add(
+                        0,
+                        BloodEntity(
+                            type = ItemType.RECORDTOP,
+                            recordTop = RecordTop(
+                                systolic = if (list.isEmpty()) 0 else sys.div(list.size),
+                                diastolic = if (list.isEmpty()) 0 else dia.div(list.size)
+                            )
+                        )
+                    )
+                    CoroutineScope(Dispatchers.Main + SupervisorJob()).launch {
+                        (recordRecyclerView.adapter as MainRVAdapter).setData(recordList)
+                    }
                 }
             }
         }
-        (recordRecyclerView.adapter as MainRVAdapter).setData(recordList)
     }
 
     private fun setNewsList() {
-        newsList = mutableListOf<BloodEntity>().apply {
+        (newsRecyclerView.adapter as MainRVAdapter).setData(mutableListOf<BloodEntity>().apply {
             newsLocalList.forEach {
                 it.iconUrl = ResourceKt.newsIcon.random()
                 add(BloodEntity(type = ItemType.NEWS, news = it))
             }
-        }
-        (newsRecyclerView.adapter as MainRVAdapter).setData(newsList)
+        })
     }
 
     private fun setSettingList() {
-        settingList = mutableListOf<BloodEntity>().apply {
+        (settingRecyclerView.adapter as MainRVAdapter).setData(mutableListOf<BloodEntity>().apply {
             settingLocalList.let {
                 for (i in 0..<it.size) {
                     if (i == 0 || i == 1 || i == it.size - 1) {
@@ -300,8 +302,7 @@ class MainActivity : BaseActivity() {
                 }
             }
 
-        }
-        (settingRecyclerView.adapter as MainRVAdapter).setData(settingList)
+        })
     }
 
 

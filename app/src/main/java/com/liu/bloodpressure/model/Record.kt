@@ -30,12 +30,10 @@ data class News(
 data class Record(
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0,
-    var systolic: Int,
-    var diastolic: Int,
-    var degree: Int,
-    var recordTime: String,
-    var changeTime: Long,
-    var showTime: Long
+    var systolic: Int = 0,
+    var diastolic: Int = 0,
+    var degree: Int = 0,
+    var showTime: Long = 0L
 ) : Parcelable
 
 data class RecordTop(
