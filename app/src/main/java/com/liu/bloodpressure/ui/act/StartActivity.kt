@@ -20,7 +20,7 @@ class StartActivity : BaseActivity() {
     }
 
     override fun initData() {
-
+        SPHelper.isLaunchedStart = true
     }
 
     override fun next(v: View) {

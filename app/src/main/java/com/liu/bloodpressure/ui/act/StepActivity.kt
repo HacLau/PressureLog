@@ -5,10 +5,8 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.viewpager.widget.ViewPager
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayout.Tab
 import com.liu.bloodpressure.R
-import com.liu.bloodpressure.adapter.StepAdapter
+import com.liu.bloodpressure.ui.adapter.StepAdapter
 import com.liu.bloodpressure.base.BaseActivity
 import com.liu.bloodpressure.model.StepEntity
 

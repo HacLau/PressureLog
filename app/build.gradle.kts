@@ -18,11 +18,11 @@ android {
     compileSdk = 33
 
     defaultConfig {
-        applicationId = "liu.ss.gg"
+        applicationId = "com.liu.bloodpressure"
         minSdk = 24
         targetSdk = 33
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 2
+        versionName = "1.0.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -66,5 +66,10 @@ dependencies {
     kapt ("androidx.room:room-compiler:2.5.2")
 
     implementation("com.github.megatronking.stringfog:xor:5.0.0")
+
+    implementation("com.google.android.gms:play-services-ads:22.4.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
+
 
 }

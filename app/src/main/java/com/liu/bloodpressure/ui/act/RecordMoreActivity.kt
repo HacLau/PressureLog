@@ -6,7 +6,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.liu.bloodpressure.R
-import com.liu.bloodpressure.adapter.MainRVAdapter
+import com.liu.bloodpressure.ui.adapter.MainRVAdapter
 import com.liu.bloodpressure.base.BaseActivity
 import com.liu.bloodpressure.database.RecordDataBase
 import com.liu.bloodpressure.model.BloodEntity

@@ -1,10 +1,12 @@
 package com.liu.bloodpressure.base
 
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Lifecycle
 import com.liu.bloodpressure.model.News
 import com.liu.bloodpressure.model.Record
 import com.liu.bloodpressure.ui.act.MainActivity
@@ -18,6 +20,7 @@ import com.liu.bloodpressure.util.type.IntentName
 import com.liu.bloodpressure.util.type.PageType
 
 abstract class BaseActivity : AppCompatActivity() {
+    var isResume = false
     private val startActivityForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
 
     }
@@ -25,9 +28,20 @@ abstract class BaseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         setFullScreen()
         super.onCreate(savedInstanceState)
+        isResume = false
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        setCustomDensity()
         setContentView(contentLayout())
         initView()
         initData()
+    }
+    private fun setCustomDensity() {
+        val metrics = resources.displayMetrics
+        (metrics.heightPixels / 760f).let {
+            metrics.density = it
+            metrics.scaledDensity = it
+            metrics.densityDpi = (160 * it).toInt()
+        }
     }
 
     private fun setFullScreen() {
@@ -76,6 +90,34 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     open fun next(v: View) {}
+    override fun onStart() {
+        super.onStart()
+        isResume = false
+    }
 
+    override fun onResume() {
+        super.onResume()
+        isResume = true
+    }
 
+    override fun onPause() {
+        super.onPause()
+        isResume = false
+    }
+
+    override fun onStop() {
+        super.onStop()
+        isResume = false
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        isResume = false
+    }
+    fun isActivityOnResume():Boolean{
+        return isResume && ifLifecycleResume()
+    }
+    private fun ifLifecycleResume():Boolean{
+        return Lifecycle.State.RESUMED == lifecycle.currentState
+    }
 }

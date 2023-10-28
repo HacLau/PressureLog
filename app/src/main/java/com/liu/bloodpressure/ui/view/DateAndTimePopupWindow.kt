@@ -103,8 +103,14 @@ class DateAndTimePopupWindow(
     }
 
     private fun setDay() {
-        mDayList = getMutList(1, DateKt.getDay(mYearText.toInt(), mMonthText.toInt()))
-        mDay.setData(mDayList, mDayList.indexOf(mDayText.toInt().xx()))
+        mDayList = getMutList(1, DateKt.getDay(mYearText.toInt(), mMonthText.toInt() + 1))
+        mDay.setData(
+            mDayList, if (mDayText.toInt() > mDayList.size) {
+                mDayList.size - 1
+            } else {
+                mDayList.indexOf(mDayText.toInt().xx())
+            }
+        )
     }
 
     private fun getMutList(startNumber: Int, endNumber: Int): MutableList<String> {

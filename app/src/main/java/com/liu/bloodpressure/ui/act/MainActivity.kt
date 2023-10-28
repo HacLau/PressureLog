@@ -11,8 +11,8 @@ import androidx.viewpager.widget.ViewPager
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import com.liu.bloodpressure.BuildConfig
 import com.liu.bloodpressure.R
-import com.liu.bloodpressure.adapter.MainAdapter
-import com.liu.bloodpressure.adapter.MainRVAdapter
+import com.liu.bloodpressure.ui.adapter.MainAdapter
+import com.liu.bloodpressure.ui.adapter.MainRVAdapter
 import com.liu.bloodpressure.base.BaseActivity
 import com.liu.bloodpressure.database.RecordDataBase
 import com.liu.bloodpressure.model.BloodEntity
@@ -136,7 +136,7 @@ class MainActivity : BaseActivity() {
 
         })
         mTitleMain.leftText.text = "${DateKt.getDay()} ${DateKt.getMonth(DateKt.getMonth() + 1)}"
-        setListData()
+//        setListData()
     }
 
     private fun mainHome(): View {
@@ -185,6 +185,7 @@ class MainActivity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
+        setListData()
     }
 
     private fun setListData() {
@@ -229,7 +230,7 @@ class MainActivity : BaseActivity() {
                         }
 
                         RecordType.WEEK -> {
-                            it.showTime < DateKt.getDayOfWeek(Calendar.SATURDAY, 0) && it.showTime > DateKt.getDayOfWeek(Calendar.SUNDAY, 0)
+                            it.showTime >= DateKt.getDayOfWeek(Calendar.SUNDAY, 0)
                         }
 
                         RecordType.MONTH -> {

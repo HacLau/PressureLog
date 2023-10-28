@@ -1,4 +1,4 @@
-package com.liu.bloodpressure.adapter
+package com.liu.bloodpressure.ui.adapter
 
 import android.view.View
 import android.view.ViewGroup

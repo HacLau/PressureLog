@@ -1,0 +1,96 @@
+{
+  "gybb": 15,
+  "illut": 3,
+  "pl_launch": [
+    {
+      "papi": "ca-app-pub-3940256099942544/3419835294",
+      "confectionery": "admob",
+      "ostentatious": "op",
+      "remedy": 13800,
+      "devote": 2
+    },
+    {
+      "papi": "ca-app-pub-3940256099942544/1033173712",
+      "confectionery": "admob",
+      "ostentatious": "int",
+      "remedy": 3000,
+      "devote": 1
+    },
+    {
+      "papi": "ca-app-pub-3940256099942544/1033173712IO",
+      "confectionery": "admob",
+      "ostentatious": "int",
+      "remedy": 3000,
+      "devote": 3
+    }
+  ],
+  "pl_record_int": [
+    {
+      "papi": "ca-app-pub-3940256099942544/1033173712",
+      "confectionery": "admob",
+      "ostentatious": "int",
+      "remedy": 3000,
+      "devote": 2
+    },
+    {
+      "papi": "ca-app-pub-3940256099942544/1033173712II",
+      "confectionery": "admob",
+      "ostentatious": "int",
+      "remedy": 3000,
+      "devote": 3
+    },
+    {
+      "papi": "ca-app-pub-3940256099942544/1033173712",
+      "confectionery": "admob",
+      "ostentatious": "int",
+      "remedy": 3000,
+      "devote": 1
+    }
+  ],
+  "pl_history_nat": [
+    {
+      "papi": "ca-app-pub-8425454773483846/7768347839NNH",
+      "confectionery": "admob",
+      "ostentatious": "nat",
+      "remedy": 3000,
+      "devote": 3
+    },
+    {
+      "papi": "ca-app-pub-8425454773483846/6310977697",
+      "confectionery": "admob",
+      "ostentatious": "nat",
+      "remedy": 3000,
+      "devote": 2
+    },
+    {
+      "papi": "ca-app-pub-8425454773483846/2371732680",
+      "confectionery": "admob",
+      "ostentatious": "nat",
+      "remedy": 3000,
+      "devote": 1
+    }
+  ],
+  "pl_alarm_nat": [
+    {
+      "papi": "ca-app-pub-3940256099942544/2247696110NNA",
+      "confectionery": "admob",
+      "ostentatious": "nat",
+      "remedy": 3000,
+      "devote": 3
+    },
+    {
+      "papi": "ca-app-pub-3940256099942544/2247696110",
+      "confectionery": "admob",
+      "ostentatious": "nat",
+      "remedy": 3000,
+      "devote": 2
+    },
+    {
+      "papi": "ca-app-pub-3940256099942544/2247696110",
+      "confectionery": "admob",
+      "ostentatious": "nat",
+      "remedy": 3000,
+      "devote": 1
+    }
+  ]
+}

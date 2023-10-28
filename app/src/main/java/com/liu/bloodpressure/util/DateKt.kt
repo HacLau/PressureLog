@@ -3,7 +3,11 @@ package com.liu.bloodpressure.util
 import java.util.Calendar
 
 object DateKt {
-
+    const val MSEC = 1
+    const val SEC = 1000
+    const val MIN = 60000
+    const val HOUR = 3600000
+    const val DAY = 86400000
     fun getYear(time: Long = System.currentTimeMillis()): Int {
         val calender = Calendar.getInstance()
         calender.timeInMillis = time
@@ -44,12 +48,14 @@ object DateKt {
     fun getDate(time: Long): String {
         val calender = Calendar.getInstance()
         calender.timeInMillis = time
-        return "${calender.get(Calendar.YEAR)}-${(calender.get(Calendar.MONTH) + 1).xx()}-${calender.get(Calendar.DATE).xx()} ${calender.get(Calendar.HOUR_OF_DAY).xx()}:${calender.get(Calendar.MINUTE).xx()}"
+        return "${calender.get(Calendar.YEAR)}-${(calender.get(Calendar.MONTH) + 1).xx()}-${
+            calender.get(Calendar.DATE).xx()
+        } ${calender.get(Calendar.HOUR_OF_DAY).xx()}:${calender.get(Calendar.MINUTE).xx()}"
     }
 
     fun getMills(year: Int, month: Int, date: Int, hour: Int, minute: Int): Long {
         val calender = Calendar.getInstance()
-        calender.set(year, month, date, hour, minute,0)
+        calender.set(year, month, date, hour, minute, 0)
         return calender.timeInMillis
     }
 
@@ -112,31 +118,31 @@ object DateKt {
 
     fun getTomorrow(): Long {
         val calender = Calendar.getInstance()
-        calender.set(getYear(), getMonth() , getDay() + 1 , 0, 0, 0)
+        calender.set(getYear(), getMonth(), getDay() + 1, 0, 0, 0)
         return calender.timeInMillis
     }
 
     fun getToday(): Long {
         val calender = Calendar.getInstance()
-        calender.set(getYear(), getMonth() , getDay() , 0, 0, 0)
+        calender.set(getYear(), getMonth(), getDay(), 0, 0, 0)
         return calender.timeInMillis
     }
 
-    fun getDayOfWeek(dayOfWeek: Int,weekOffset:Int,firstDayOfWeek: Int = Calendar.SUNDAY,):Long{
+    fun getDayOfWeek(dayOfWeek: Int, weekOffset: Int, firstDayOfWeek: Int = Calendar.SUNDAY): Long {
         val calender = Calendar.getInstance()
-        if (dayOfWeek > Calendar.SATURDAY || dayOfWeek < Calendar.SUNDAY){
+        if (dayOfWeek > Calendar.SATURDAY || dayOfWeek < Calendar.SUNDAY) {
             return 0L
         }
-        if (firstDayOfWeek > Calendar.SATURDAY || firstDayOfWeek < Calendar.SUNDAY){
+        if (firstDayOfWeek > Calendar.SATURDAY || firstDayOfWeek < Calendar.SUNDAY) {
             return 0L
         }
         calender.firstDayOfWeek = firstDayOfWeek
-        calender.add(Calendar.WEEK_OF_MONTH,weekOffset)
-        calender.set(Calendar.DAY_OF_WEEK,dayOfWeek)
-        calender.set(Calendar.HOUR,0)
-        calender.set(Calendar.MINUTE,0)
-        calender.set(Calendar.SECOND,0)
-        calender.set(Calendar.MILLISECOND,0)
+        calender.add(Calendar.WEEK_OF_MONTH, weekOffset)
+        calender.set(Calendar.DAY_OF_WEEK, dayOfWeek)
+        calender.set(Calendar.HOUR, 0)
+        calender.set(Calendar.MINUTE, 0)
+        calender.set(Calendar.SECOND, 0)
+        calender.set(Calendar.MILLISECOND, 0)
         return calender.timeInMillis
 
     }
@@ -157,6 +163,21 @@ object DateKt {
         val calender = Calendar.getInstance()
         calender.set(getYear(), getMonth() - 1, 1, 0, 0, 0)
         return calender.timeInMillis
+    }
+
+    fun isToday(millis: Long): Boolean {
+        return getWeeOfToday().let {
+            millis >= it && millis < it + DAY
+        }
+    }
+
+    private fun getWeeOfToday(): Long {
+        val cal = Calendar.getInstance()
+        cal[Calendar.HOUR_OF_DAY] = 0
+        cal[Calendar.SECOND] = 0
+        cal[Calendar.MINUTE] = 0
+        cal[Calendar.MILLISECOND] = 0
+        return cal.timeInMillis
     }
 
 

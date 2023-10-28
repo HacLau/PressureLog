@@ -15,4 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "BloodPressure"
 include(":app")
- 
+include(":advertising")

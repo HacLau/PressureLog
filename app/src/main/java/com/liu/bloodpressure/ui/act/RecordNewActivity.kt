@@ -8,6 +8,7 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import com.liu.bloodpressure.R
+import com.liu.bloodpressure.advertising.AdvertisingHelper
 import com.liu.bloodpressure.base.BaseActivity
 import com.liu.bloodpressure.database.RecordDataBase
 import com.liu.bloodpressure.model.Record
@@ -84,13 +85,14 @@ class RecordNewActivity : BaseActivity() {
             if (mRecord.diastolic > mRecord.systolic) {
                 getString(R.string.toast_record_new).toast(this)
             } else {
-                CoroutineScope(Dispatchers.IO + SupervisorJob()).launch {
-                    kotlin.runCatching {
-                        saveRecordData()
+                AdvertisingHelper.recordAd.showFullScreen(this){
+                    CoroutineScope(Dispatchers.IO + SupervisorJob()).launch {
+                        kotlin.runCatching {
+                            saveRecordData()
+                        }
                     }
+                    finish()
                 }
-                finish()
-
             }
         }
     }
