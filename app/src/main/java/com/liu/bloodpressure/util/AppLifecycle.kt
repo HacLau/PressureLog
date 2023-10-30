@@ -19,7 +19,7 @@ class AppLifecycle :Application.ActivityLifecycleCallbacks{
         if (runningActivities == 0 ){
             if (!SPHelper.isLaunchedStart){
                 startStartActivity()
-            }else if (System.currentTimeMillis() - inBackgroundTime > 5000) {
+            }else if (inBackgroundTime != 0L && System.currentTimeMillis() - inBackgroundTime > 5000) {
                 startSplashActivity()
             }
         }

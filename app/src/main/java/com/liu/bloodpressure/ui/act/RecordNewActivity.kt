@@ -9,9 +9,11 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import com.liu.bloodpressure.R
 import com.liu.bloodpressure.advertising.AdvertisingHelper
+import com.liu.bloodpressure.advertising.AdvertisingType
 import com.liu.bloodpressure.base.BaseActivity
 import com.liu.bloodpressure.database.RecordDataBase
 import com.liu.bloodpressure.model.Record
+import com.liu.bloodpressure.net.FireBaseHelper
 import com.liu.bloodpressure.ui.view.DateAndTimePopupWindow
 import com.liu.bloodpressure.ui.view.HorizontalPicker
 import com.liu.bloodpressure.ui.view.TitleView
@@ -19,6 +21,7 @@ import com.liu.bloodpressure.util.DateKt
 import com.liu.bloodpressure.util.type.IntentName
 import com.liu.bloodpressure.util.type.PageType
 import com.liu.bloodpressure.util.dp2px
+import com.liu.bloodpressure.util.no
 import com.liu.bloodpressure.util.toast
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -85,6 +88,13 @@ class RecordNewActivity : BaseActivity() {
             if (mRecord.diastolic > mRecord.systolic) {
                 getString(R.string.toast_record_new).toast(this)
             } else {
+                AdvertisingHelper.overCount().no {
+                    FireBaseHelper.updateEvent(
+                        "pl_ad_chance", mutableMapOf(
+                            "pl_ad_id" to AdvertisingType.RECORD.type
+                        )
+                    )
+                }
                 AdvertisingHelper.recordAd.showFullScreen(this){
                     CoroutineScope(Dispatchers.IO + SupervisorJob()).launch {
                         kotlin.runCatching {
@@ -95,6 +105,10 @@ class RecordNewActivity : BaseActivity() {
                 }
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
     }
 
     private fun saveRecordData() {

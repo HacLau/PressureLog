@@ -2,16 +2,21 @@ package com.liu.bloodpressure.ui.act
 
 import android.view.View
 import android.widget.ProgressBar
+import androidx.lifecycle.lifecycleScope
 import com.liu.bloodpressure.R
 import com.liu.bloodpressure.advertising.AdvertisingHelper
+import com.liu.bloodpressure.advertising.AdvertisingType
 import com.liu.bloodpressure.base.BaseActivity
+import com.liu.bloodpressure.net.FireBaseHelper
 import com.liu.bloodpressure.util.SPHelper
 import com.liu.bloodpressure.util.logE
+import com.liu.bloodpressure.util.no
 import com.liu.bloodpressure.util.other
 import com.liu.bloodpressure.util.yes
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.Timer
 import java.util.TimerTask
@@ -25,10 +30,16 @@ class SplashActivity : BaseActivity() {
 
     override fun initData() {
         setProgress()
-        AdvertisingHelper.launchAd.load(this)
-        AdvertisingHelper.recordAd.load(this)
-        AdvertisingHelper.historyAd.load(this)
-        AdvertisingHelper.alarmAd.load(this)
+        AdvertisingHelper.overCount().no {
+            FireBaseHelper.updateEvent("pl_ad_chance", mutableMapOf(
+                "pl_ad_id" to AdvertisingType.LAUNCH.type
+            ))
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
     }
 
     override fun initView() {
@@ -39,19 +50,35 @@ class SplashActivity : BaseActivity() {
         val time = Timer()
         time.schedule(object : TimerTask() {
             override fun run() {
-                if (mProgressBar.progress > 50 && AdvertisingHelper.launchAd.cacheIsNotEmpty) {
-                    mProgressBar.progress = mProgressBar.progress + 2
-                } else if (mProgressBar.progress > 80 && AdvertisingHelper.launchAd.cacheIsNotEmpty) {
-                    mProgressBar.progress = mProgressBar.progress + 3
-                } else {
+                if (!isActivityOnResume()) {
+                    return
+                }
+                "AdvertisingHelper.launchAd.cacheIsNotEmpty  ${AdvertisingHelper.launchAd.cache.isNotEmpty()}".logE()
+                if (AdvertisingHelper.launchAd.cache.isNotEmpty()){
+                    if (mProgressBar.progress > 40) {
+                        mProgressBar.progress = mProgressBar.progress + 4
+                    } else if (mProgressBar.progress > 70) {
+                        mProgressBar.progress = mProgressBar.progress + 5
+                    } else {
+                        mProgressBar.progress = mProgressBar.progress + 3
+                    }
+                }else{
                     mProgressBar.progress++
                 }
+
 
                 if (mProgressBar.progress >= 100) {
                     time.cancel()
                     CoroutineScope(Dispatchers.Main + SupervisorJob()).launch {
                         AdvertisingHelper.launchAd.showFullScreen(this@SplashActivity) {
-                            next(View(this@SplashActivity))
+                            lifecycleScope.launch {
+                                if (isActivityOnResume()) {
+                                    next(View(this@SplashActivity))
+                                } else {
+
+                                }
+
+                            }
                         }
                     }
                 } else {

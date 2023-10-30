@@ -13,6 +13,7 @@ import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.liu.bloodpressure.base.BaseActivity
 import com.liu.bloodpressure.base.BaseAd
+import com.liu.bloodpressure.net.FireBaseHelper
 import com.liu.bloodpressure.util.logE
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -60,6 +61,7 @@ class FullScreenAdvertising(
             val baseActivity = activity as? BaseActivity
             if (null != baseActivity){
                 baseActivity.lifecycleScope.launch {
+                    "baseActivity.isActivityOnResume() = ${baseActivity.isActivityOnResume()}".logE()
                     while (!baseActivity.isActivityOnResume()) delay(200L)
                     onDismiss.invoke()
                 }
@@ -105,8 +107,15 @@ class FullScreenAdvertising(
                     show(activity)
                 }
             }
-            else -> onDismiss.invoke()
+            else -> {
+                "not type of item adv".logE()
+                onDismiss.invoke()
+            }
         }
+        FireBaseHelper.updateEvent("pl_ad_impression", mutableMapOf(
+            "pl_ad_id" to type.type
+        ))
+
     }
 
     private val openCallback = object :AppOpenAd.AppOpenAdLoadCallback(){

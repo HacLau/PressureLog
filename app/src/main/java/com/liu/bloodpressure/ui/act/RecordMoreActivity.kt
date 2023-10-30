@@ -44,6 +44,7 @@ class RecordMoreActivity : BaseActivity() {
         }
         mToRecord.setOnClickListener {
             startRecordNewActivity()
+            finish()
         }
         mRecyclerView.addItemDecoration(Decoration(6))
         mRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)

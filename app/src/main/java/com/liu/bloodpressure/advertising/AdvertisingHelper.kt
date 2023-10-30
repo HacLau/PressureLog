@@ -32,7 +32,7 @@ object AdvertisingHelper {
     }
 
     private fun overShow(): Boolean {
-        "Advertising current showTimes = ${SPHelper.showTimes}".logE()
+        "Advertising current time = ${DateKt.getDate(SPHelper.showTime)} showTimes = ${SPHelper.showTimes} ".logE()
         return (showCount == 0).yes {
             false
         }.other {
@@ -46,7 +46,7 @@ object AdvertisingHelper {
 
     private fun overClick(): Boolean {
 
-        "Advertising current clickTimes = ${SPHelper.clickTimes}".logE()
+        "Advertising current time = ${DateKt.getDate(SPHelper.clickTime)}  clickTimes = ${SPHelper.clickTimes} ".logE()
         return (clickCount == 0).yes { false }.other {
             DateKt.isToday(SPHelper.clickTime).yes {
                 SPHelper.clickTimes >= clickCount
@@ -57,7 +57,7 @@ object AdvertisingHelper {
     }
 
     fun addShow() {
-        "Advertising show Success current showTimes = ${SPHelper.showTimes} add 1".logE()
+        "Advertising show Success time = ${DateKt.getDate(SPHelper.showTime)} current showTimes = ${SPHelper.showTimes} add 1".logE()
         kotlin.runCatching {
             DateKt.isToday(SPHelper.showTime).yes {
                 SPHelper.showTimes++
@@ -69,7 +69,7 @@ object AdvertisingHelper {
     }
 
     fun addClick() {
-        "Advertising was Clicked current clickTimes = ${SPHelper.clickTimes} add 1".logE()
+        "Advertising was Clicked time = ${DateKt.getDate(SPHelper.clickTime)}  current clickTimes = ${SPHelper.clickTimes} add 1".logE()
         kotlin.runCatching {
             DateKt.isToday(SPHelper.clickTime).yes {
                 SPHelper.clickTimes++
