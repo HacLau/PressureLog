@@ -5,9 +5,11 @@ import com.google.android.gms.ads.MobileAds
 import com.google.firebase.FirebaseApp
 import com.google.gson.Gson
 import com.liu.bloodpressure.advertising.AdvertisingHelper
+import com.liu.bloodpressure.net.RemoteConfigHelper
 import com.liu.bloodpressure.util.AppLifecycle
 import com.liu.bloodpressure.util.AssetsKt
 import com.liu.bloodpressure.util.logE
+import com.liu.bloodpressure.util.no
 
 lateinit var application: App
 
@@ -22,21 +24,26 @@ class App:Application() {
         AdvertisingHelper.initAdvertising(json)
         MobileAds.initialize(this){}
         FirebaseApp.initializeApp(this)
-        if (AdvertisingHelper.launchAd.cache.isNotEmpty().not()) {
+        AdvertisingHelper.launchAd.cache.isNotEmpty().no {
             "Advertising launchAd cacheIsEmpty".logE()
             AdvertisingHelper.launchAd.load(this)
         }
-        if (AdvertisingHelper.recordAd.cache.isNotEmpty().not()) {
+        AdvertisingHelper.recordAd.cache.isNotEmpty().no {
             "Advertising recordAd cacheIsEmpty".logE()
             AdvertisingHelper.recordAd.load(this)
         }
-        if (AdvertisingHelper.historyAd.cache.isNotEmpty().not()) {
+        AdvertisingHelper.historyAd.cache.isNotEmpty().no {
             "Advertising historyAd cacheIsEmpty".logE()
             AdvertisingHelper.historyAd.load(this)
         }
-        if (AdvertisingHelper.alarmAd.cache.isNotEmpty().not()) {
+        AdvertisingHelper.alarmAd.cache.isNotEmpty().no {
             "Advertising alarmAd cacheIsEmpty".logE()
             AdvertisingHelper.alarmAd.load(this)
         }
+        BuildConfig.DEBUG.no{
+            RemoteConfigHelper.getRemote()
+        }
+
+
     }
 }

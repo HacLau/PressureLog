@@ -4,6 +4,7 @@ plugins {
     id("kotlin-parcelize")
     id("kotlin-kapt")
     id("stringfog")
+//    id("com.google.gms.google-services")
 }
 apply(plugin = "stringfog")
 configure<com.github.megatronking.stringfog.plugin.StringFogExtension> {
@@ -71,8 +72,15 @@ dependencies {
     implementation("com.google.android.gms:play-services-ads:22.4.0")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
+    // firebase
     implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
+    implementation("com.google.firebase:firebase-analytics-ktx")
+    implementation("com.google.firebase:firebase-config-ktx")
+    // okhttp
     implementation("com.squareup.okhttp3:okhttp:3.2.0")
+    // facebook
+    implementation("com.facebook.android:facebook-android-sdk:12.3.0")
+
 
 
 }
